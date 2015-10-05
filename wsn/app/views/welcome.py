@@ -10,5 +10,7 @@ def welcome(request):
         wel = request.POST['wel']
     except:
         wel = "welcome WSN"
-    return HttpResponse("Welcome WSN")
+    return render(request, 'welcome.html', {})
+
+
 # Create your views here.

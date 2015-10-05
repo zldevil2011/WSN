@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
+import settings
 
-
-urlpatterns = patterns('',
-                       url(r'^admin/', include(admin.site.urls)),
-                       url(r'', include('app.urls')),
-                       )
+urlpatterns =\
+    patterns('',
+             url(r'^admin/', include(admin.site.urls)),
+             url(r'', include('app.urls')),
+             url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_PATH})
+             # url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_PATH}),
+             )
 # urlpatterns = [
 # url(r'^admin/', include(admin.site.urls)),
 #     # url(r'', include('app.url')),
