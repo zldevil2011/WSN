@@ -21,6 +21,7 @@ urlpatterns =\
     patterns('',
              url(r'^admin/', include(admin.site.urls)),
              url(r'', include('app.urls')),
+             url(r'^wsn_admin/', include('app.admin_urls')),
              url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_PATH})
              # url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_PATH}),
              )

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>池州星地一体化监测及无线传感器网络应用示范</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" charset="utf-8" src="/site_media/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/site_media/js/jquery.form.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+	    $('#selType').html('${requestScope.innerhtml1}');
+	    $("#selType option[value='${requestScope.first}']").attr("selected",
+				"selected");
+		$('#selType2').html('${requestScope.innerhtml2}');
+		$("#selType2 option[value='${requestScope.news_type}']").attr("selected",
+				"selected");
+	});
+
+	function seebytype(type) {
+		window.location.href = 'Managenews?news_type=' + type;
+	}
+
+	function deletenews(news_id) {
+		if (confirm('是否将此文章移动到回收站?')) {
+			window.location.href = 'Deletenews?news_id='
+					+ news_id
+					+ '&news_type=${requestScope.news_type}&pageIndex=${requestScope.nav.pageIndex}';
+		}
+	}
+	function fsubmit(page){
+		$('#fpageIndex').val(page);
+		$('#fnews_type').val('${requestScope.news_type}');
+		$('#changepage').submit();
+	}
+	
+	 function Selchange(id) {  
+    	window.location.href = 'Managenews?news_type=' + (id*100);
+    }
+</script>
+<link rel="stylesheet" href="/site_media/css/manage.css" />
+
+</head>
+
+<body>
+	<div class="csdn-toolbar csdn-toolbar-skin-black ">
+		<div class="container row center-block ">
+            <div class="pull-left">
+                <a href="managenews.jsp" >新闻模块</a>
+                <a href="manageadmin.jsp" >用户管理</a>
+                <a href="managedata_air.jsp">数据管理</a>
+            </div>
+			<div class="pull-right login-wrap unlogin">
+				<ul class="btns">
+					<li class="loginlink"><span>欢迎您，XXX
+					</span>&nbsp;|<a href="updateadmininfo.jsp" target="_top">&nbsp;修改信息&nbsp;</a>|<a href="updateadminpwd.jsp"
+						target="_top">&nbsp;修改密码&nbsp;</a> |<a target="_top" href="Adminlogout">&nbsp;登出</a>|<a target="_top" href="GetIndexData">&nbsp;首页</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="wrap">
+
+		<div class="head">
+
+			<div class="user_info"></div>
+		</div>
+
+		<div class="tabs_header">
+			<ul id="ul_tab" class="tabs" style="width:395px;">
+				<li><a href="Pubnewspage"><span>发表新闻</span> </a></li>
+				<li class="active"><a href="#"><span>新闻管理</span> </a></li>
+				<li><a href="managedraft.jsp"><span>草稿箱</span> </a></li>
+				<li><a href="managerecycle.jsp"><span>回收站</span> </a></li>
+			</ul>
+		</div>
+
+		<div id="sel_div" class="h_status">
+			<span style="float:left;margin-top:3px;margin-right:3px;">类别: </span>
+			<select id="selType" onchange="Selchange(this.value);">
+			</select>
+			<select id="selType2" onchange="seebytype(this.value);">
+			</select>
+		</div>
+		<table id="lstBox" cellspacing="0">
+			<tr>
+				<th class="tdleft">标题</th>
+				<th style="width:90px;">发布人</th>
+				<th style="width:50px;">阅读</th>
+				<th style="width:70px;">新闻类别</th>
+ 				<th style="width:170px;">操作</th>
+			</tr>
+            {% for currentnews in news_list %}
+                <tr>
+                    <td class="tdleft">
+                        <a href="/news_detail?news_id={{currentnews.news_id}}" target=_blank class="tdleft-link">
+                            {{currentnews.news_title}}
+                        </a>
+                        <span class="gray">（{{currentnews.news_update_time}}）</span>
+                    </td>
+
+                    <td>{{currentnews.news_readtime}}</td>
+
+                    <td><a href="Editnews?news_id={{currentnews.news_id}">编辑</a>
+                        | <c:if test="{{currentnews.news_priori > 0}">
+                            <a href="Cancelnewstop?news_id={{currentnews.news_id}"
+                                class="red">取消置顶</a>
+                        </c:if> <c:if test="{{currentnews.news_priori == 0}">
+                            <a href="Placenewstop?news_id={{currentnews.news_id}">置顶</a>
+                        </c:if> | <a href="javascript:;" name=del
+                        onClick="deletenews('{{currentnews.news_id}');">删除</a></td>
+                </tr>
+            {% endfor %}
+		</table>
+		<div class="page_nav">
+			<n:nav pageCount="${requestScope.nav.pageCount}"
+				pageIndex="${requestScope.nav.pageIndex}"
+				totalnum="${requestScope.nav.totalnum}"
+				navigationUrl="Managenews"
+				params="${requestScope.nav.params}"></n:nav>
+			<form id="changepage" method="post" action="Managenews">
+				<input type="hidden" name ="pageIndex" id="fpageIndex"/>
+				<input type="hidden" name="news_type" id="fnews_type" />
+				<input type="hidden" name="keyword"/>
+			</form>
+		</div>
+	</div>
+<form id="Selchange" method = "post" action="Selchange"></form>
+</body>
+</html>

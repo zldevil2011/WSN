@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+	background-color:#c9d9f0;
+}
+.source{
+	position:relative;
+	top:580px;
+	left:0px;
+	background-color:#c9d9f0;
+	background-image:url(../images/source.png);
+	background-position:center;
+	background-repeat:no-repeat;
+}
+.left{
+	font-size: 32px;
+	height:100%;
+	width:15%;
+	background-color:gray;
+	float:left;
+}
+.middle{
+	font-size: 32px;
+	width:52%;
+	height:74%;
+	position:absolute;
+	left:24%;
+	background-color: green;
+	text-indent:10px;
+	background-image:url(../images/enterance.jpg);
+	background-repeat:no-repeat;
+}
+.right{
+	font-size: 32px;
+	width:85%;
+	height:100%;
+	background-color: gray;
+	float:right;
+}
+.button{
+	width:100px;
+	height:40px;
+	font-family: 宋体;
+	font-size: 20px;
+	position:relative;
+	left:10px;
+	color: red;
+	bottom: 10px;
+}
+
+* { 
+margin: 0; 
+padding: 0; 
+} 
+body { 
+padding: 50px 50px; 
+} 
+.btn-select { 
+position: relative; 
+display: inline-block; 
+width: 150px; 
+height: 25px; 
+background-color: #f80; 
+font: 14px/20px "Microsoft YaHei"; 
+color: #fff; 
+} 
+.btn-select .cur-select { 
+position: absolute; 
+display: block; 
+width: 150px; 
+height: 25px; 
+line-height: 25px; 
+background: #f80 url(ico-arrow.png) no-repeat 125px center; 
+text-indent: 10px; 
+} 
+.btn-select:hover .cur-select { 
+background-color: #f90; 
+} 
+.btn-select select { 
+position: absolute; 
+top: 0; 
+left: 0; 
+width: 150px; 
+height: 25px; 
+opacity: 0; 
+filter: alpha(opacity: 0;); 
+font: 14px/20px "Microsoft YaHei"; 
+color: #f80; 
+} 
+.btn-select select option { 
+text-indent: 10px; 
+} 
+.btn-select select option:hover { 
+background-color: #f80; 
+color: #fff; 
+} 

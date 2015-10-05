@@ -1,0 +1,327 @@
+<html>
+	<head>
+		<base href="<%=basePath%>">
+		<title>池州星地一体化监测及无线传感器网络应用示范</title>
+		<link href="/site_media/css/enterance.css" rel="stylesheet" type="text/css">
+		<link href="/site_media/css/stlye.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript"
+			src="http://api.map.baidu.com/api?v=2.0&ak=39b92e64ae5622663ceceaccd8ab8eb1"></script>
+		
+		<script type="text/javascript" src="/site_media/js/menu.js"></script>
+		<script type="text/javascript" src="/site_media/js/ScrollPic.js"></script>
+		<script type="text/javascript" src="/site_media/js/jquery.js"></script>
+		<script src="/site_media/js/logger.js"></script>
+		<script type="text/javascript" src="/site_media/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" language="javascript" src="/site_media/js/slides.jquery.js"></script>
+    </head>
+<style>
+.mybottom{
+	height: 5%;
+	width: 70.7%;
+	position:relative;
+	top:94.5%;
+	left:14.7%;
+	bottom: 0px;
+	background-image:url(/site_media/images/source.png);
+	background-repeat:no-repeat;
+}
+html {
+	height: 100%
+}
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px
+}
+#right {
+	height: 100%;
+	width: 67%;
+	background-color:none;
+	float:right;
+	
+}
+#left{
+	font-size:16px;
+	height: 100%;
+	width: 33%;
+	background-color:none;
+	float:left;
+	
+}
+a{
+	text-decoration: none;
+}
+#left_one{
+	margin-top: 10px;
+	width: 99%;
+	height:294px;
+	background-color: none;
+	float:left;
+	border: 1px solid;
+}
+#left_two{
+	width: 99%;
+	height:294px;
+	background-color: none;
+	float:left;
+	border: 1px solid;
+}
+.column_bar {
+border-bottom: 1px solid #ddd;
+}
+.column_bar a{ 
+	float:right; 
+	font-size:12px; 
+	text-decoration:none; 
+	color:#009ace; 
+	line-height:28px;
+	height:28px; 
+	width:40px; 
+	display:block
+}
+
+.column_bar span{ 
+	display:block; 
+	background:url(/site_media/images/column_bg.gif) no-repeat;
+	width:101px; 
+	height:28px; 
+	text-align:center; 
+	line-height:28px; 
+	color:#FFFFFF; 
+	font-weight:bold; 
+	font-size:14px;
+}
+.list1{
+}
+.list1 ul {
+padding: 8px;
+}
+.list1 ul li {
+	font-size: 14px;
+	line-height: 27px;
+	height: 27px;
+	overflow: hidden;
+	display: block;
+}
+.comein {
+border-bottom: 1px solid #ddd;
+}
+.comein a{
+	text-align:center;
+	background:url(/site_media/images/column_bg1.gif) no-repeat;
+	float:right; 
+	font-size:14px; 
+	text-decoration:none; 
+	color:#009ace; 
+	line-height:28px;
+	height:28px; 
+	width:106px; 
+	display:block;
+	line-height:28px; 
+	color:#FFFFFF; 
+	font-weight:bold; 
+}
+.liitem{
+	height:31px;
+	border-bottom-color: #cccccc;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+}
+.liitem img{
+	color: #aaa;
+	font-size: 13px;
+	margin-top: 3px;
+	float:left;
+}
+</style>
+	<body>
+		<div>
+			<div class="head_con wrap">
+                <div class = "head-con">
+                    <a href = "/" ><img src = "/site_media/images/mlogo.png"/></a>
+                    <img src = "/site_media/images/logo.png" style = "margin-top:22px;"/>
+                    <!--<div class="logo"><a href="Showindex">北京师范大学研发实验服务基地</a></div> -->
+                </div>
+                <div class="clear"></div>
+                <div class="main_nav">
+                  <ul style = "margin:0px;">
+                    <li><a href="/" >首页</a></li>
+                    <li ><a href="/news_list?news_type=101">基地概况</a></li>
+                    <li><a href="/news_list?news_type=201">动态新闻</a></li>
+                    <li><a href="/news_list?news_type=202">通知公告</a></li>
+                    <li><a href="/instruments_list?news_type=301">观测设备</a></li>
+                    <li><a href="/news_list?news_type=401">服务流程</a></li>
+                    <li onmouseover="showMenu(6)" onmouseout="hiddenMenu(6)"><a href="javascript:void(0);">政策法规</a></li>
+                    <li><a href="/news_list?news_type=601">常用下载</a></li>
+                    <li onmouseover="showMenu(8)" onmouseout="hiddenMenu(8)"><a href="javascript:void(0);">数据观测</a></li>
+
+                  </ul>
+                  <div class="clear"></div>
+                   <!--下拉菜单 Began -->
+                  <div class="down_menu">
+                    <div class="submenubox" id="menu6"
+                        onmouseover="showMenu(6)" onmouseout="hiddenMenu(6)">
+                      <div class="submenu">
+                        <ul>
+                          <li><a href="/news_list?news_type=501">国家标准</a></li>
+                         <li><a href="/news_list?news_type=502">行业标准</a></li>
+                         <li><a href="/news_list?news_type=503">国际标准</a></li>
+                         <li><a href="/news_list?news_type=504">其他标准</a></li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="submenubox" id="menu8"
+                        onmouseover="showMenu(8)" onmouseout="hiddenMenu(8)">
+                      <div class="submenu">
+                        <ul>
+                          <li><a href="GetMainAir">环境监测</a></li>
+                         <li><a href="GetTodayTem?name=童子岭">温度监测</a></li>
+                         <li><a href="GetMainWater">水质监测</a></li>
+            <!--  			 <li><a href="GetMainAir">森林监测</a></li>-->
+                         <li><a href="GetArcticData?item=voltage">北极数据测试</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!--下拉菜单 End -->
+                </div>
+            </div>
+		</div>
+		<div class="head_con wrap">
+			<div class="head-con" style="height: 643px; background: none;">
+				<div id = "left">
+					<div id="left_one">
+         				<div class="column_bar"><a href="/news_list?news_type=201">更多&raquo;</a><span>动态新闻</span></div>
+         				<div class="list1">
+         					<ul style="list-style:circle">
+                                {% for currentnews in news_list %}
+                                    <li class = "liitem">
+                                        <img src="/site_media/images/arrow0.gif" />
+                                            <a target="_blank" href="/news_detail?news_id={{currentnews.news_id}}">
+                                                {{currentnews.news_title}}}</a>
+                                    </li>
+                                {% endfor %}
+         					</ul>
+         				</div>
+					</div>
+					<div id="left_two">
+						<div class="column_bar"><a href="/news_list?news_type=202">更多»</a><span>通知公告</span></div>
+         				<div class="list1">
+         					<ul style="list-style:circle">
+                                {% for currentnews in notice_list %}
+                                    <li class = "liitem">
+                                        <img src="/site_media/images/arrow0.gif" />
+										<a target="_blank" href="/news_detail?news_id={{currentnews.news_id}}">
+											{{currentnews.news_title}}</a>
+									</li>
+                                {% endfor %}
+         					</ul>
+         				</div>
+					</div>
+					<br/>
+					<div class="comein">
+                        <a href="fmapview.jsp">管理员</a>
+                        <a href = "fmapview.jsp" style = "float:left;">普通游客</a></span>
+                    </div>
+         		</div>
+				<div id="right">
+					<img src="/site_media/images/entrance.png" style="width:100%;height:100%">
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		<div class="footer">
+            <div class="bottom margin12 wrap">
+                Copyright ©2014-2014 池州市童子岭观测点 <br>
+                联系方式：<a href="mailto:929034478@qq.com" target="_blank">技术支持邮箱</a>  &nbsp;&nbsp;&nbsp;<a href="adminlogin.jsp" target="_blank">管理入口</a>
+            </div>
+
+        </div>
+
+<script type="text/javascript">
+	$(function() {
+	    $("#slides").slides({
+		preload: true,
+		preloadImage: 'images/loading.gif',
+		play: 5000,
+		pause: 2500,
+		hoverPause: true
+	});
+	var mw = $(".mbox").width()+10;
+	var ml = $(".mbox").length;
+	$(".themes").width(mw*ml);
+	$(".t_menu li").mouseover(function(){
+		var index = $(this).index();
+		$(".themes").animate({left:-mw*index,opacity:1},500);
+	});
+		$("#password").keypress(function(event) {
+			if (event.keyCode == 13) {
+				$('#header-login-btn').trigger("click");
+			}
+		});
+
+		$("#header-login-btn").click(function() {
+			if ($("#user").val == "")
+				return false;
+			if ($("#password").val == "")
+				return false;
+			$('#Login').ajaxSubmit({
+				target : $("<div></div>"),
+				datatype : "json",
+				success : function(data) {
+					if (data.success) {
+						//window.location.reload();
+						window.location.href = "/Home/Menu";
+					} else {
+						alert(data.message);
+					}
+				}
+			});
+		});
+	});
+
+	var menuid;
+	$(".menusel").each(function() {
+		menuid = this;
+		type();
+	});
+
+	function type() {
+		var menuh2 = menuid.getElementsByTagName("h2");
+		var menuul = menuid.getElementsByTagName("ul");
+		var menuli = menuul[0].getElementsByTagName("li");
+		menuh2[0].onmouseover = show;
+		menuh2[0].onmouseout = unshow;
+		menuul[0].onmouseover = show;
+		menuul[0].onmouseout = unshow;
+		function show() {
+			menuul[0].className = "clearfix typeul block";
+		}
+		function unshow() {
+			menuul[0].className = "typeul";
+		}
+		for ( var i = 0; i < menuli.length; i++) {
+			menuli[i].num = i;
+			var liul = menuli[i].getElementsByTagName("ul")[0];
+			if (liul) {
+				typeshow();
+			}
+		}
+		function typeshow() {
+			menuli[i].onmouseover = showul;
+			menuli[i].onmouseout = unshowul;
+		}
+		function showul() {
+			menuli[this.num].getElementsByTagName("ul")[0].className = "block";
+		}
+		function unshowul() {
+			menuli[this.num].getElementsByTagName("ul")[0].className = "";
+		}
+	}
+
+
+</script>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>池州星地一体化监测及无线传感器网络应用示范</title>
+		<meta http-equiv="pragma" content="no-cache"/>
+		<meta http-equiv="cache-control" content="no-cache"/>
+		<meta http-equiv="expires" content="0"/>
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
+		<meta http-equiv="description" content="This is my page"/>
+		<link href="/site_media/css/login.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8" src="/site_media/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/site_media/js/jquery.form.js"></script>
+		<script language="JavaScript">
+		
+	function userlogin_submit() {
+		$('#userloginform').ajaxSubmit({
+		type: 'post',
+		success: function(data) {
+			if(data == 'success') {
+				window.location.href = 'managenews.jsp';
+			} else {
+				alert('用户名不存在或密码错误');
+			}
+		}
+	});
+	}
+	</script>
+	</head>
+	<body>
+		<div id="logo"> </div>
+		 
+		<div class="login_tit2">
+			<img src="/site_media/images/nw.png" />
+		</div>
+		<form id="userloginform" name="userform" action="/wsn_admin/admin_login" method="post">
+			<div class="login_main">
+				<p>
+					<span>用户名</span>
+					<input type="text" class="input_01" name="login"/>
+				</p>
+				<p>
+					<span>密码</span>
+					<input type="password" class="input_01" name="pwd"/>
+				</p>
+				<p>
+					<span></span>
+					<input type="button" class="input_02" name="login" onclick="userlogin_submit()"/>
+				</p>
+			</div>
+		</form>
+		<div class="login_user"></div>
+	</body>
+</html>
