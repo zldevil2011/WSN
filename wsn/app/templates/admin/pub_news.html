@@ -15,7 +15,10 @@
     <body>
         <script type="text/javascript" >
             $(function(){
-                $('#selType').html('${requestScope.innerhtml1}');
+{#                var htm = "{{innerhtml1}}";#}
+{#                console.log(htm);#}
+{#                alert(htm);#}
+{#                $('#selType').html(htm);#}
             });
             function Selchange(id) {
                 $('#Selchange').ajaxSubmit({
@@ -69,12 +72,22 @@
                 <div class="pubnews_title">发布时间</div>
                 <div style="display:block; width:500px;height:30px;">
                     <input  name="nowtime" id="txtTitle" type="text"
-                        style="width:190px; height:20px; float:left;" maxlength="100" value="${requestScope.nowtime}"/>
+                        style="width:190px; height:20px; float:left;" maxlength="100" value="{{ nowtime }}"/>
                 </div>
                 <div class="pubnews_title">文章类型</div>
 
                 <div style="display:block; width:500px;height:30px;">
-                    <select id="selType" name="selType" onchange="Selchange(this.value)"></select>
+                    <select id="selType" name="selType" onchange="Selchange(this.value)">
+                        <option value= '0'>请选择</option>
+                        <option value= '1'>基地概况</option>
+                        <option value= '2'>新闻公告</option>
+                        <option value= '3'>观测设备</option>
+                        <option value= '4'>服务流程</option>
+                        <option value= '5'>政策法规</option>
+                        <option value= '6'>常用下载</option>
+                        <option value= '7'>测试专用</option>
+                    </select>
+
                     <select id="selType2" name="selType2"><option value="0">请选择</option></select>
                 </div>
                 <div class="pubnews_title">文章标题</div>

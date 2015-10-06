@@ -1,5 +1,7 @@
+# coding=utf-8
 from django.shortcuts import render
 from app.models import News, Admin
+import time
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -22,8 +24,14 @@ def admin_news(request):
 
 
 def pub_news_page(request):
+    # innerhtml = "<option value= '0'>请选择</option>"
+    # innerhtml += newsService.get_first_innerhtml()
+    ISOTIMEFORMAT = '%Y-%m-%d %X'
+    currentTime = time.strftime(ISOTIMEFORMAT, time.localtime())
+    # print innerhtml
     return render(request, 'admin/pub_news.html', {
-
+        # "innerhtml1": innerhtml,
+        "nowtime": currentTime
     })
 
 
