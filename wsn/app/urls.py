@@ -8,6 +8,7 @@ urlpatterns = \
              url('^welcome/$', views.welcome.welcome, name='welcome'),
              url('^index/$', views.index.index, name='index'),
              url('^news/(?P<news_id>\d+)$', views.news.news_detail, name='news_detail'),
+             url('^news_list/$', views.news.news_list, name='news_list'),
              )
 
 # urlpatterns = [

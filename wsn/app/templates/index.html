@@ -146,13 +146,13 @@ border-bottom: 1px solid #ddd;
                 <div class="main_nav">
                   <ul style = "margin:0px;">
                     <li><a href="/" >首页</a></li>
-                    <li ><a href="/news_list?news_type=101">基地概况</a></li>
-                    <li><a href="/news_list?news_type=201">动态新闻</a></li>
-                    <li><a href="/news_list?news_type=202">通知公告</a></li>
-                    <li><a href="/instruments_list?news_type=301">观测设备</a></li>
-                    <li><a href="/news_list?news_type=401">服务流程</a></li>
+                    <li ><a href="/news_list?news_type=11">基地概况</a></li>
+                    <li><a href="/news_list?news_type=21">动态新闻</a></li>
+                    <li><a href="/news_list?news_type=22">通知公告</a></li>
+                    <li><a href="/instruments_list?news_type=31">观测设备</a></li>
+                    <li><a href="/news_list?news_type=41">服务流程</a></li>
                     <li onmouseover="showMenu(6)" onmouseout="hiddenMenu(6)"><a href="javascript:void(0);">政策法规</a></li>
-                    <li><a href="/news_list?news_type=601">常用下载</a></li>
+                    <li><a href="/news_list?news_type=61">常用下载</a></li>
                     <li onmouseover="showMenu(8)" onmouseout="hiddenMenu(8)"><a href="javascript:void(0);">数据观测</a></li>
 
                   </ul>
@@ -163,10 +163,10 @@ border-bottom: 1px solid #ddd;
                         onmouseover="showMenu(6)" onmouseout="hiddenMenu(6)">
                       <div class="submenu">
                         <ul>
-                          <li><a href="/news_list?news_type=501">国家标准</a></li>
-                         <li><a href="/news_list?news_type=502">行业标准</a></li>
-                         <li><a href="/news_list?news_type=503">国际标准</a></li>
-                         <li><a href="/news_list?news_type=504">其他标准</a></li>
+                          <li><a href="/news_list?news_type=51">国家标准</a></li>
+                         <li><a href="/news_list?news_type=52">行业标准</a></li>
+                         <li><a href="/news_list?news_type=53">国际标准</a></li>
+                         <li><a href="/news_list?news_type=54">其他标准</a></li>
                         </ul>
                       </div>
                     </div>
@@ -198,8 +198,8 @@ border-bottom: 1px solid #ddd;
                                 {% for currentnews in news_list %}
                                     <li class = "liitem">
                                         <img src="/site_media/images/arrow0.gif" />
-                                            <a target="_blank" href="/news_detail?news_id={{currentnews.news_id}}">
-                                                {{currentnews.news_title}}}</a>
+                                            <a target="_blank" href="/news/{{currentnews.news_id}}">
+                                                {{currentnews.news_title}}</a>
                                     </li>
                                 {% endfor %}
          					</ul>
