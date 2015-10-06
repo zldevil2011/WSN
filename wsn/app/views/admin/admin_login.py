@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.cache import cache
-from django.views.decorators.cache import never_cache
+from django.http import HttpResponse
 
 
 def admin_index(request):

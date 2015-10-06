@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>池州星地一体化监测及无线传感器网络应用示范</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" charset="utf-8" src="/site_media/js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/site_media/js/jquery.form.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/site_media/ueditor/ueditor.config.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/site_media/ueditor/ueditor.all.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/site_media/ueditor/ueditor.parse.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/site_media/js/pubnews.js"></script>
+        <link rel="stylesheet" type="text/css"  href="/site_media/ueditor/themes/default/css/ueditor.css" />
+        <link rel="stylesheet" href="/site_media/css/manage.css" />
+    </head>
+    <body>
+        <script type="text/javascript" >
+            $(function(){
+                $('#selType').html('${requestScope.innerhtml1}');
+            });
+            function Selchange(id) {
+                $('#Selchange').ajaxSubmit({
+                    type: 'post',
+                    url: 'Selchange?first='+id,
+                    success: function(data) {
+                        tmp = '<option value="';
+                        tmp+= (id*100);
+                        tmp+='">请选择</option>';
+                        tmp+=data;
+                        $('#selType2').html(tmp);
+                    }
+                });
+            }
+        </script>
+
+        <div class="csdn-toolbar csdn-toolbar-skin-black ">
+            <div class="container row center-block ">
+                <div class="pull-left">
+                    <a href="managenews.jsp" >新闻模块</a>
+                    <a href="manageadmin.jsp" >用户管理</a>
+                    <a href="managedata_air.jsp">数据管理</a>
+                </div>
+                <div class="pull-right login-wrap unlogin">
+                    <ul class="btns">
+                        <li class="loginlink"><span>欢迎您，XXX
+                        </span>&nbsp;|<a href="updateadmininfo.jsp" target="_top">&nbsp;修改信息&nbsp;</a>|<a href="updateadminpwd.jsp"
+                            target="_top">&nbsp;修改密码&nbsp;</a> |<a target="_top" href="Adminlogout">&nbsp;登出</a>|<a target="_top" href="GetIndexData">&nbsp;首页</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="wrap">
+
+            <div class="head">
+                <div class="user_info"></div>
+            </div>
+
+            <div class="tabs_header">
+                <ul id="ul_tab" class="tabs" style= "width:395px;">
+                    <li class="active"><a href="#"><span>发表新闻</span> </a></li>
+                    <li><a href="admin_news"><span>新闻管理</span> </a></li>
+                    <li><a href="admin_draft"><span>草稿箱</span> </a></li>
+                    <li><a href="admin_recycle"><span>回收站</span> </a></li>
+                </ul>
+            </div>
+            <form id="pubnewsform" method="post" action="Pubnews">
+                <div class="pubnews_title">发布时间</div>
+                <div style="display:block; width:500px;height:30px;">
+                    <input  name="nowtime" id="txtTitle" type="text"
+                        style="width:190px; height:20px; float:left;" maxlength="100" value="${requestScope.nowtime}"/>
+                </div>
+                <div class="pubnews_title">文章类型</div>
+
+                <div style="display:block; width:500px;height:30px;">
+                    <select id="selType" name="selType" onchange="Selchange(this.value)"></select>
+                    <select id="selType2" name="selType2"><option value="0">请选择</option></select>
+                </div>
+                <div class="pubnews_title">文章标题</div>
+                <div class="pubnews_type">
+                    <input  name="pubnews_title" id="txtTitle" type="text"
+                        style="width:590px; height:20px; float:left;" maxlength="100" /> <span
+                        style="display:inline-block; padding:4px 0 0 10px;"> </span>
+                </div>
+
+                <div class="pubnews_title">文章内容</div>
+                <div class="section">
+                    <script type="text/plain" id="editor" name="mycontent"
+                        style="width:719px; height:450px"> </script>
+                    <script type="text/javascript">
+                        var ue = UE.getEditor('editor');
+                    </script>
+                </div>
+            </form>
+
+            <div class="btn_area_1">
+                <div class="btn_area_11">
+                    <input id="btnPublish" type="button" class="input_btn_1"
+                        value="发表文章" title="发表并跳转" onClick="javascript:pub_news();" />
+                    <input id="btnDraft" type="button" class="input_btn_1" value="立即保存"
+                        title="保存文章并留在当前页" onClick = "javascript:save_draft();" />
+                    <input id="btnCancel" type="button" class="input_btn_1" value="舍弃" />
+                    <span id="sp_note" class="savenote"> </span>
+                </div>
+            </div>
+        </div>
+        <form id="Selchange" method = "post" action="Selchange"></form>
+    </body>
+</html>
+
+
+

@@ -70,10 +70,10 @@
 
 		<div class="tabs_header">
 			<ul id="ul_tab" class="tabs" style="width:395px;">
-				<li><a href="Pubnewspage"><span>发表新闻</span> </a></li>
+				<li><a href="pub_news_page"><span>发表新闻</span> </a></li>
 				<li class="active"><a href="#"><span>新闻管理</span> </a></li>
-				<li><a href="managedraft.jsp"><span>草稿箱</span> </a></li>
-				<li><a href="managerecycle.jsp"><span>回收站</span> </a></li>
+				<li><a href="admin_draft"><span>草稿箱</span> </a></li>
+				<li><a href="admin_recycle"><span>回收站</span> </a></li>
 			</ul>
 		</div>
 
@@ -92,25 +92,29 @@
 				<th style="width:70px;">新闻类别</th>
  				<th style="width:170px;">操作</th>
 			</tr>
-            {% for currentnews in news_list %}
-                <tr>
+
+            {% for k, v in news_info.items %}
+
+                <tr class="altitem">
                     <td class="tdleft">
-                        <a href="/news_detail?news_id={{currentnews.news_id}}" target=_blank class="tdleft-link">
-                            {{currentnews.news_title}}
+                        <a href="/news/{{k.news_id}}" target=_blank class="tdleft-link">
+                            {{k.news_title}}
                         </a>
-                        <span class="gray">（{{currentnews.news_update_time}}）</span>
+                        <span class="gray">（{{k.news_update_time}}）</span>
                     </td>
-
-                    <td>{{currentnews.news_readtime}}</td>
-
-                    <td><a href="Editnews?news_id={{currentnews.news_id}">编辑</a>
-                        | <c:if test="{{currentnews.news_priori > 0}">
+                    <td>{{v.admin_username}}</td>
+                    <td>{{k.news_readtime}}</td>
+                    <td>{{k.news_type}}</td>
+                    <td>
+                        <a href="Editnews?news_id={{k.news_id}">编辑</a> |
+                        {% if k.news_priori > 0%}
                             <a href="Cancelnewstop?news_id={{currentnews.news_id}"
                                 class="red">取消置顶</a>
-                        </c:if> <c:if test="{{currentnews.news_priori == 0}">
+                        {% else %}
                             <a href="Placenewstop?news_id={{currentnews.news_id}">置顶</a>
-                        </c:if> | <a href="javascript:;" name=del
-                        onClick="deletenews('{{currentnews.news_id}');">删除</a></td>
+                        {% endif %}
+                         | <a href="javascript:;" name=del onClick="deletenews('{{currentnews.news_id}');">删除</a>
+                    </td>
                 </tr>
             {% endfor %}
 		</table>

@@ -8,15 +8,22 @@ from django.views.decorators.cache import never_cache
 
 
 def admin_news(request):
+    news_info = {}
+
     news_list = News.objects.all()
-    authors = []
+
     for news in news_list:
         user = news.news_author
-        authors.append(user)
-    # return HttpResponse("AK47")
+        news_info[news] = user
+    # return HttpResponse(news_info.values())
     return render(request, 'admin/admin_news.html', {
-        'news_list': news_list,
-        'authors': authors,
+        'news_info': news_info
+    })
+
+
+def pub_news_page(request):
+    return render(request, 'admin/pub_news.html', {
+
     })
 
 

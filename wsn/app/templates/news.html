@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>池州星地一体化监测及无线传感器网络应用示范观测点</title>
+        <base href="." target="_self">
+        <script type="text/javascript" src="/site_media/js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="/site_media/js/menu.js"></script>
+        <script type="text/javascript" src="/site_media/js/ScrollPic.js"></script>
+        <script type="text/javascript" src="/site_media/js/jquery.js"></script>
+        <script src="/site_media/js/logger.js"></script>
+        <script type="text/javascript" src="/site_media/js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" language="javascript" src="/site_media/js/slides.jquery.js"></script>
+        <link href="/site_media/css/frontlayout.css" rel="stylesheet">
+        <link href="/site_media/css/stlye.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="head_con wrap">
+                <div class = "head-con">
+                    <a href = "/" ><img src = "/site_media/images/mlogo.png"/></a>
+                    <img src = "/site_media/images/logo.png" style = "margin-top:22px;"/>
+                    <!--<div class="logo"><a href="Showindex">北京师范大学研发实验服务基地</a></div> -->
+                </div>
+                <div class="clear"></div>
+                <div class="main_nav">
+                  <ul style = "margin:0px;">
+                    <li><a href="/" >首页</a></li>
+                    <li ><a href="/news_list?news_type=101">基地概况</a></li>
+                    <li><a href="/news_list?news_type=201">动态新闻</a></li>
+                    <li><a href="/news_list?news_type=202">通知公告</a></li>
+                    <li><a href="/instruments_list?news_type=301">观测设备</a></li>
+                    <li><a href="/news_list?news_type=401">服务流程</a></li>
+                    <li onmouseover="showMenu(6)" onmouseout="hiddenMenu(6)"><a href="javascript:void(0);">政策法规</a></li>
+                    <li><a href="/news_list?news_type=601">常用下载</a></li>
+                    <li onmouseover="showMenu(8)" onmouseout="hiddenMenu(8)"><a href="javascript:void(0);">数据观测</a></li>
+
+                  </ul>
+                  <div class="clear"></div>
+                   <!--下拉菜单 Began -->
+                  <div class="down_menu">
+                    <div class="submenubox" id="menu6"
+                        onmouseover="showMenu(6)" onmouseout="hiddenMenu(6)">
+                      <div class="submenu">
+                        <ul>
+                          <li><a href="/news_list?news_type=501">国家标准</a></li>
+                         <li><a href="/news_list?news_type=502">行业标准</a></li>
+                         <li><a href="/news_list?news_type=503">国际标准</a></li>
+                         <li><a href="/news_list?news_type=504">其他标准</a></li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="submenubox" id="menu8"
+                        onmouseover="showMenu(8)" onmouseout="hiddenMenu(8)">
+                      <div class="submenu">
+                        <ul>
+                          <li><a href="GetMainAir">环境监测</a></li>
+                         <li><a href="GetTodayTem?name=童子岭">温度监测</a></li>
+                         <li><a href="GetMainWater">水质监测</a></li>
+            <!--  			 <li><a href="GetMainAir">森林监测</a></li>-->
+                         <li><a href="GetArcticData?item=voltage">北极数据测试</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!--下拉菜单 End -->
+                </div>
+            </div>
+
+            <div class="content">
+                <div class = "news-content-left">
+                  <div class= "news-left-img">
+                    <img src="/site_media/images/004.JPG" />
+                    </div>
+                 <div class = "news-left-relate">
+                    <div class = "news-left-head">
+                        最近新闻
+                    </div>
+                    <div class = "news-left-title">
+                        <ul class = "news-left-list">
+                            {% for news in tmp_list %}
+                                <li class="news-left-item"><img src="/site_media/images/arrow0.gif" />
+                                    <a href="/news/{{news.news_id}}">{{news.news_title}}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                 </div>
+                </div>
+                <div class = "news-content-right">
+                    <div class = "news-content-headinfo">
+                        <div class = "news-right-pos">
+                            当前位置： <a href = "">首页</a> >> <a href = ""> 通知公告 </a>
+                        </div>
+                        <div class = "news-set-font">
+                            [字体：<a>&nbsp;大&nbsp;</a>
+                            <a>&nbsp;中&nbsp;</a>
+                            <a>&nbsp;小&nbsp;</a> ]
+                        </div>
+                    </div>
+                    <div class = "news-content-title">{{news.news_title}}</div>
+                    <div class = "news-content-time">发布时间：{{news.news_update_time}} &nbsp;&nbsp; 发布人：
+                        {{news.news_author.admin_username}}&nbsp;&nbsp;阅读人次：{{ news.news_readtime }}</div>
+                    <div class = "news-content-detail">{{news.news_content}}</div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="footer">
+                <div class="bottom margin12 wrap">
+                    Copyright ©2014-2014 池州市童子岭观测点 <br>
+                    联系方式：<a href="mailto:929034478@qq.com" target="_blank">技术支持邮箱</a>  &nbsp;&nbsp;&nbsp;<a href="adminlogin.jsp" target="_blank">管理入口</a>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
