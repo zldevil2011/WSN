@@ -17,7 +17,8 @@
 	});
 
 	function seebytype(type) {
-		window.location.href = 'Managenews?news_type=' + type;
+        var tmp = Number($("#selType").val()) * 10 + Number(type);
+		window.location.href = 'admin_news?news_type=' + tmp;
 	}
 
 	function deletenews(news_id) {
@@ -34,7 +35,6 @@
 	}
 	
 	 function Selchange(id) {
-         alert()
     	window.location.href = 'admin_news?news_type=' + id;
     }
 </script>
@@ -81,7 +81,6 @@
 		<div id="sel_div" class="h_status">
 			<span style="float:left;margin-top:3px;margin-right:3px;">类别: </span>
 			<select id="selType" onchange="Selchange(this.value);">
-{#                {{ innerhtml1 }}#}
 			</select>
 			<select id="selType2" onchange="seebytype(this.value);">
 			</select>

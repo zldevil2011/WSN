@@ -27,13 +27,25 @@ def admin_news(request):
     innerhtml2 = "<option value='0'>请选择</option>"
     try:
         news_type = int(request.GET['news_type'])
-        news_list = News.objects.filter(news_type=news_type)
     except:
         news_type = 0
+    if news_type == 0:
         news_list = News.objects.all()[0:20]
+    else:
+        print "new_type", news_type
+        if news_type < 10:
+            print "big type"
+            news_list = News.objects.filter(news_type__istartswith=news_type)
+        else:
+            news_list = News.objects.filter(news_type=news_type)
 
-    first_type = news_type / 10
-    second_type = news_type % 10
+    print "news_list_len", len(news_list)
+    if news_type < 10:
+        first_type = news_type
+        second_type = 0
+    else:
+        first_type = news_type / 10
+        second_type = news_type % 10
     for news in news_list:
         user = news.news_author
         news_info[news] = user
@@ -55,8 +67,8 @@ def admin_news(request):
         else:
             innerhtml2 += "<option value="
         innerhtml2 += "'" + str(count) + "'>" + str(i) + "</option>"
-    print innerhtml1
-    print innerhtml2
+    # print innerhtml1
+    # print innerhtml2
     # return HttpResponse(news_info.values())
     return render(request, 'admin/admin_news.html', {
         'news_info': news_info,
