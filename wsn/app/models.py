@@ -32,8 +32,8 @@ class News(models.Model):
     news_type = models.IntegerField()
     news_content = models.CharField(max_length=10000)
     news_update_time = models.CharField(max_length=200)
-    news_priori = models.IntegerField()
-    news_readtime = models.IntegerField()
+    news_priori = models.IntegerField(default=0)
+    news_readtime = models.IntegerField(default=0)
     news_author = models.ForeignKey(Admin, related_name='news', null=True)
 
     def __unicode__(self):

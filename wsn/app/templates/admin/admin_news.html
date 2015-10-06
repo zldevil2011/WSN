@@ -8,12 +8,12 @@
 
 <script type="text/javascript">
 	$(function() {
-	    $('#selType').html('${requestScope.innerhtml1}');
-	    $("#selType option[value='${requestScope.first}']").attr("selected",
-				"selected");
-		$('#selType2').html('${requestScope.innerhtml2}');
-		$("#selType2 option[value='${requestScope.news_type}']").attr("selected",
-				"selected");
+        var tmp1 = "";
+        tmp1 += "{% autoescape off %}{{ innerhtml1 }}{% endautoescape %}";
+	    $('#selType').html(tmp1);
+        var tmp2 = "";
+        tmp2 += "{% autoescape off %}{{ innerhtml2 }}{% endautoescape %}";
+		$('#selType2').html(tmp2);
 	});
 
 	function seebytype(type) {
@@ -33,8 +33,9 @@
 		$('#changepage').submit();
 	}
 	
-	 function Selchange(id) {  
-    	window.location.href = 'Managenews?news_type=' + (id*100);
+	 function Selchange(id) {
+         alert()
+    	window.location.href = 'admin_news?news_type=' + id;
     }
 </script>
 <link rel="stylesheet" href="/site_media/css/manage.css" />
@@ -80,6 +81,7 @@
 		<div id="sel_div" class="h_status">
 			<span style="float:left;margin-top:3px;margin-right:3px;">类别: </span>
 			<select id="selType" onchange="Selchange(this.value);">
+{#                {{ innerhtml1 }}#}
 			</select>
 			<select id="selType2" onchange="seebytype(this.value);">
 			</select>
@@ -106,14 +108,14 @@
                     <td>{{k.news_readtime}}</td>
                     <td>{{k.news_type}}</td>
                     <td>
-                        <a href="Editnews?news_id={{k.news_id}">编辑</a> |
+                        <a href="Editnews?news_id={{k.news_id}}">编辑</a> |
                         {% if k.news_priori > 0%}
-                            <a href="Cancelnewstop?news_id={{currentnews.news_id}"
+                            <a href="Cancelnewstop?news_id={{currentnews.news_id}}"
                                 class="red">取消置顶</a>
                         {% else %}
-                            <a href="Placenewstop?news_id={{currentnews.news_id}">置顶</a>
+                            <a href="Placenewstop?news_id={{currentnews.news_id}}">置顶</a>
                         {% endif %}
-                         | <a href="javascript:;" name=del onClick="deletenews('{{currentnews.news_id}');">删除</a>
+                         | <a href="javascript:;" name=del onClick="deletenews('{{currentnews.news_id}}');">删除</a>
                     </td>
                 </tr>
             {% endfor %}

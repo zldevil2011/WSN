@@ -23,7 +23,7 @@
             function Selchange(id) {
                 $('#Selchange').ajaxSubmit({
                     type: 'post',
-                    url: 'Selchange?first='+id,
+                    url: 'sel_change?first='+id,
                     success: function(data) {
                         tmp = '<option value="';
                         tmp+= (id*100);
@@ -68,7 +68,7 @@
                     <li><a href="admin_recycle"><span>回收站</span> </a></li>
                 </ul>
             </div>
-            <form id="pubnewsform" method="post" action="Pubnews">
+            <form id="pubnewsform" method="post" action="pub_news">
                 <div class="pubnews_title">发布时间</div>
                 <div style="display:block; width:500px;height:30px;">
                     <input  name="nowtime" id="txtTitle" type="text"
@@ -99,8 +99,7 @@
 
                 <div class="pubnews_title">文章内容</div>
                 <div class="section">
-                    <script type="text/plain" id="editor" name="mycontent"
-                        style="width:719px; height:450px"> </script>
+                    <script type="text/plain" id="editor" name="mycontent" style="width:719px; height:450px"> </script>
                     <script type="text/javascript">
                         var ue = UE.getEditor('editor');
                     </script>
