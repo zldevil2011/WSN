@@ -26,6 +26,19 @@ class Air(models.Model):
         return str(self.air_id)
 
 
+class Water(models.Model):
+    water_id = models.AutoField(primary_key=True)
+    ph = models.FloatField()
+    do = models.FloatField()
+    turbidity = models.FloatField()
+    water_level = models.FloatField()
+    conductivity = models.FloatField()
+    time = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return str(self.water_id)
+
+
 class News(models.Model):
     news_id = models.AutoField(primary_key=True)
     news_title = models.CharField(max_length=200)

@@ -1,87 +1,43 @@
 #coding=utf-8
 import sys
-from app.models import News, Air
+from app.models import Air, Water
 from django.shortcuts import render
 from django.http import HttpResponse
 import random
+import time
 
 air_parameter = ["pm25", "cloud", "rain", "ziwai", "guang", "clouddir"]
 air_parameter_data = {
-    "pm25": {
-        "name": "PM2.5",
-        "unit": "(μg/立方米)"
-    },
-    "cloud": {
-        "name": "风速",
-        "unit": "(m/s)"
-    },
-    "rain": {
-        "name": "雨量",
-        "unit": "(ms/平方米)）"
-    },
-    "ziwai": {
-        "name": "紫外线指数",
-        "unit": "(uw/平方厘米)"
-    },
-    "guang": {
-        "name": "光量子",
-        "unit": "(umol/m^2*s)"
-    },
-    "clouddir": {
-        "name": "风向",
-        "unit": ""
-    }
+    "pm25": {"name": "PM2.5", "unit": "(μg/立方米)"},
+    "cloud": {"name": "风速",  "unit": "(m/s)"},
+    "rain": {"name": "雨量", "unit": "(ms/平方米)）" },
+    "ziwai": {"name": "紫外线指数", "unit": "(uw/平方厘米)"},
+    "guang": {"name": "光量子", "unit": "(umol/m^2*s)"},
+    "clouddir": {"name": "风向", "unit": "" }
 }
 cloud_dir = ["E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"]
 cloud_dir_data = {
-    "E": {
-        "count": 0
-    },
-    "ESE": {
-        "count": 0
-    },
-    "SE": {
-        "count": 0
-    },
-    "SSE": {
-        "count": 0
-    },
-    "S": {
-        "count": 0
-    },
-    "SSW": {
-        "count": 0
-    },
-    "SW": {
-        "count": 0
-    },
-    "WSW": {
-        "count": 0
-    },
-    "W": {
-        "count": 0
-    },
-    "WNW": {
-        "count": 0
-    },
-    "NW": {
-        "count": 0
-    },
-    "NNW": {
-        "count": 0
-    },
-    "N": {
-        "count": 0
-    }
+    "E": {"count": 0},
+    "ESE": {"count": 0},
+    "SE": {"count": 0},
+    "SSE": {"count": 0},
+    "S": {"count": 0},
+    "SSW": {"count": 0},
+    "SW": {"count": 0},
+    "WSW": {"count": 0},
+    "W": {"count": 0},
+    "WNW": {"count": 0},
+    "NW": {"count": 0},
+    "NNW": {"count": 0},
+    "N": {"count": 0}
 }
+
 def air(request):
     air_type = "pm25"
     try:
         air_type = request.GET['air_type']
     except:
         air_type = "pm25"
-
-    # data, title, danwei
     data = []
     air_list = Air.objects.all()[0:30]
     air_type = str(air_type)
@@ -130,6 +86,45 @@ def air(request):
         "air_type": air_type,
         "cloud_dir_count_data": cloud_dir_count_data
         })
+
+water_parameter = ["ph", "do", "turbidity", "water_level", "conductivity"]
+water_parameter_data = {
+    "ph": {"name": "酸碱度", "unit": ""},
+    "do": {"name": "溶解氧", "unit": "mg/L"},
+    "turbidity": {"name": "浊度", "unit": "FTU"},
+    "water_level": {"name": "水位", "unit": "米"},
+    "conductivity": {"name": "电导率", "unit": "s/cm"},
+}
+def water(request):
+    water_type = "ph"
+    try:
+        water_type = request.GET("water_type")
+    except:
+        pass
+
+    water_list = Water.objects.all()[0:30]
+    water_unit = water_parameter_data[water_type]["unit"]
+    water_title = water_parameter_data[water_type]["name"]
+    # print water_unit, water_title
+    test = []
+    water_data = []
+    for water in water_list:
+        tmp_dic = {}
+        ISOTIMEFORMAT = '%Y-%m-%d %X'
+        data_time = water.time
+        data_time_format = data_time.strftime(ISOTIMEFORMAT)
+        timeArray = time.strptime(data_time_format, "%Y-%m-%d %H:%M:%S")
+        seconds = int(time.mktime(timeArray))
+        tmp_dic["x"] = seconds
+        tmp_dic["y"] = float(water.ph)
+        water_data.append(tmp_dic)
+    print water_data
+    return render(request, "water.html", {
+        "water_unit": water_unit,
+        "water_title": water_title,
+        "water_data": water_data,
+    })
+
 
 # Create your views here.
 
