@@ -3,6 +3,7 @@ import sys
 from app.models import News, Air
 from django.shortcuts import render
 from django.http import HttpResponse
+import random
 
 air_parameter = ["pm25", "cloud", "rain", "ziwai", "guang", "clouddir"]
 air_parameter_data = {
@@ -31,6 +32,8 @@ air_parameter_data = {
         "unit": ""
     }
 }
+cloud_dir = ["E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"]
+
 def air(request):
     air_type = "pm25"
     try:
@@ -65,3 +68,4 @@ def air(request):
         })
 
 # Create your views here.
+

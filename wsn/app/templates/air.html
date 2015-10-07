@@ -46,70 +46,127 @@
             }
         </script>
         <script>
-            $(function () {
-                $('#container').highcharts({
-                    chart: {
-                        zoomType: 'x',
-                        spacingRight: 20
-                    },
-                    title: {
-                        text: '池州市环境监测数据-'+"{{ title }}"
-                    },
-                    subtitle: {
-                        text: document.ontouchstart === undefined ?
-                            '在绘图区域中单击并拖动缩放' :
-                            'Pinch the chart to zoom in'
-                    },
-                    xAxis: {
-                        type: 'datetime',
-                        maxZoom: 14 * 24 * 3600000, // fourteen days
+            if("{{ air_type }}" == "clouddir"){
+                alert("clouddir");
+                $(function () {
+                    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+                        return {
+                            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                            stops: [
+                                [0, color],
+                                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                            ]
+                        };
+                    });
+                    $('#container').highcharts({
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false
+                        },
                         title: {
-                            text: null
-                        }
-                    },
-                    yAxis: {
-                        title: {
-                            text: "{{ unit }}"
-                        }
-                    },
-                    tooltip: {
-                        shared: true
-                    },
-                    legend: {
-                        enabled: false
-                    },
-                    plotOptions: {
-                        area: {
-                            fillColor: {
-                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
-                                stops: [
-                                    [0, Highcharts.getOptions().colors[0]],
-                                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                                ]
-                            },
-                            lineWidth: 1,
-                            marker: {
-                                enabled: false
-                            },
-                            shadow: false,
-                            states: {
-                                hover: {
-                                    lineWidth: 1
+                            text: 'Browser market shares at a specific website, 2010'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    color: '#000000',
+                                    connectorColor: '#000000',
+                                    formatter: function() {
+                                        return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                                    }
                                 }
-                            },
-                            threshold: null
-                        }
-                    },
-
-                    series: [{
-                        type: 'area',
-                        name: "{{ title }}",
-                        pointInterval: 24 * 3600 * 1000,
-                        pointStart: Date.UTC(2015, 8, 27),
-                        data:{{ data }}
-                    }]
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: 'Browser share',
+                            data: [
+                                ['Firefox',   45.0],
+                                ['IE',       26.8],
+                                ['Chrome',  12.8],
+                                ['Safari',    8.5],
+                                ['Opera',     6.2],
+                                ['Others',   0.7]
+                            ]
+                        }]
+                    });
                 });
-            });
+
+            }
+            else {
+{#                alert("normal");#}
+                $(function () {
+                    $('#container').highcharts({
+                        chart: {
+                            zoomType: 'x',
+                            spacingRight: 20
+                        },
+                        title: {
+                            text: '池州市环境监测数据-' + "{{ title }}"
+                        },
+                        subtitle: {
+                            text: document.ontouchstart === undefined ?
+                                    '在绘图区域中单击并拖动缩放' :
+                                    'Pinch the chart to zoom in'
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            maxZoom: 14 * 24 * 3600000, // fourteen days
+                            title: {
+                                text: null
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: "{{ unit }}"
+                            }
+                        },
+                        tooltip: {
+                            shared: true
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        plotOptions: {
+                            area: {
+                                fillColor: {
+                                    linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                                    stops: [
+                                        [0, Highcharts.getOptions().colors[0]],
+                                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                    ]
+                                },
+                                lineWidth: 1,
+                                marker: {
+                                    enabled: false
+                                },
+                                shadow: false,
+                                states: {
+                                    hover: {
+                                        lineWidth: 1
+                                    }
+                                },
+                                threshold: null
+                            }
+                        },
+
+                        series: [{
+                            type: 'area',
+                            name: "{{ title }}",
+                            pointInterval: 24 * 3600 * 1000,
+                            pointStart: Date.UTC(2015, 8, 27),
+                            data:{{ data }}
+                        }]
+                    });
+                });
+            }
         </script>
 	</head>
 	<body>
