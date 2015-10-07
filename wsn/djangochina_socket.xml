@@ -1,0 +1,7 @@
+<uwsgi>
+    <socket>:8077</socket>
+    <chdir>/home/devil/django/wsn/WSN/wsn</chdir>
+    <module>django_wsgi</module>
+    <processes>4</processes> <!-- ½ø --> 
+    <daemonize>uwsgi.log</daemonize>
+</uwsgi>
