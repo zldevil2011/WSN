@@ -34,9 +34,10 @@ air_parameter_data = {
 def air(request):
     air_type = "pm25"
     try:
-        air_type = request.POST['air_type']
+        air_type = request.GET['air_type']
     except:
         air_type = "pm25"
+
     # data, title, danwei
     data = []
     air_list = Air.objects.all()[0:24]
@@ -60,6 +61,7 @@ def air(request):
         "data": data,
         "title": title,
         "unit": unit,
+        "air_type": air_type,
         })
 
 # Create your views here.

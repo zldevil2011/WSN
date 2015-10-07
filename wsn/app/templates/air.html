@@ -35,8 +35,14 @@
             .mrn0{margin-right: 30px;width: 10%; }
         </style>
         <script type="text/javascript">
+            $(function(){
+               $("#"+"{{ air_type }}").addClass("btn-primary");
+            });
             function exportData(){
                 window.location.href="ExportData?type=air";
+            }
+            function get_air(air_type){
+                window.location.href = "/air?air_type=" + air_type;
             }
         </script>
         <script>
@@ -51,7 +57,7 @@
                     },
                     subtitle: {
                         text: document.ontouchstart === undefined ?
-                            'Click and drag in the plot area to zoom in' :
+                            '在绘图区域中单击并拖动缩放' :
                             'Pinch the chart to zoom in'
                     },
                     xAxis: {
@@ -165,12 +171,12 @@
 			<div class="head-con" style="height: 640px; background: none;">
                 <p>
 			        数据类型：
-                    <button class="btn btn-primary mrn0" style="margin-left: 30px;">PM2.5</button>
-                    <button class="btn mrn0">风速</button>
-                    <button class="btn mrn0">雨量</button>
-                    <button class="btn mrn0">紫外线</button>
-                    <button class="btn mrn0">光量子</button>
-                    <button class="btn mrn0">风向</button>
+                    <button id = "pm25" class="btn mrn0" style="margin-left: 30px;" onclick="get_air('pm25');">PM2.5</button>
+                    <button id = "cloud" class="btn mrn0" onclick="get_air('cloud');">风速</button>
+                    <button id = "rain" class="btn mrn0" onclick="get_air('rain');">雨量</button>
+                    <button id = "ziwai" class="btn mrn0" onclick="get_air('ziwai');">紫外线</button>
+                    <button id = "guang" class="btn mrn0" onclick="get_air('guang');">光量子</button>
+                    <button id = "clouddir" class="btn mrn0" onclick="get_air('clouddir');">风向</button>
                 </p>
 				<div class="clear"></div>
                 <div id="container" style="min-width:700px;height:400px"></div>
