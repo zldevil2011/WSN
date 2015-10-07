@@ -23,7 +23,7 @@ class Air(models.Model):
     time = models.DateTimeField()
 
     def __unicode__(self):
-        return self.air_id
+        return str(self.air_id)
 
 
 class News(models.Model):

@@ -1,0 +1,189 @@
+<html>
+	<head>
+		<title>池州环境监测</title>
+		<link href="/site_media/css/stlye.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="/site_media/css/enterance.css">
+		<link rel="stylesheet" type="text/css" href="/site_media/css/bootstrap.min.css">
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=39b92e64ae5622663ceceaccd8ab8eb1"></script>
+        <script type="text/javascript" src="/site_media/js/menu.js"></script>
+		<script type="text/javascript" src="/site_media/js/ScrollPic.js"></script>
+        <script type="text/javascript" src="/site_media/js/jquery.1.9.1.min.js"></script>
+{#        <script type="text/javascript" src="/site_media/js/jquery-1.7.2.min.js"></script>#}
+
+{#		<script src="/site_media/js/Chart.js"></script>#}
+{#		<script type="text/javascript" src="/site_media/js/jquery.1.9.1.min.js"></script>#}
+		<script type="text/javascript" src="/site_media/js/highcharts.js"></script>
+		<script type="text/javascript" src="/site_media/js/exporting.js"></script>
+{#		<script type="text/javascript" src="/site_media/js/highcharts-3d.js"></script>#}
+
+{#		<script type="text/javascript" src="/site_media/js/jquery.js"></script>#}
+{#		<script src="/site_media/js/logger.js"></script>#}
+
+{#		<link rel="stylesheet" type="text/css" href="/site_media/css/amazeui.min.css">#}
+{#		<script type="text/javascript" language="javascript" src="/site_media/js/slides.jquery.js"></script>#}
+
+        <style>
+            html {  height: 100%   }
+            body {  height: 100%;  margin: 0px;  padding: 0px    }
+            #right { height: 100%;  width: 85%;  background-color: gray;  float:right;    }
+            #left{  font-size:27px; height: 100%; width: 15%; background-color:gray; float:left;   }
+            tr {  text-align:center; display: table-row;vertical-align: inherit;border-color: inherit;}
+            td, th {text-align:center;display: table-cell;vertical-align: inherit;}
+            .cur {font-size: 14px;color: #000000;width: 135px;height: 60px;background: url(/site_media/images/tdstyle.png) no-repeat center center;  }
+            .activehover{font-size: 14px;color: #000000;width: 135px;height: 60px;background: url(/site_media/images/tdstyle_cur.png) no-repeat center center;  }
+            a{text-decoration: none;}
+            .mrn0{margin-right: 30px;width: 10%; }
+        </style>
+        <script type="text/javascript">
+            function exportData(){
+                window.location.href="ExportData?type=air";
+            }
+        </script>
+        <script>
+            $(function () {
+                $('#container').highcharts({
+                    chart: {
+                        zoomType: 'x',
+                        spacingRight: 20
+                    },
+                    title: {
+                        text: '池州市环境监测数据-'+"{{ title }}"
+                    },
+                    subtitle: {
+                        text: document.ontouchstart === undefined ?
+                            'Click and drag in the plot area to zoom in' :
+                            'Pinch the chart to zoom in'
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        maxZoom: 14 * 24 * 3600000, // fourteen days
+                        title: {
+                            text: null
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: "{{ unit }}"
+                        }
+                    },
+                    tooltip: {
+                        shared: true
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        area: {
+                            fillColor: {
+                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                                stops: [
+                                    [0, Highcharts.getOptions().colors[0]],
+                                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                ]
+                            },
+                            lineWidth: 1,
+                            marker: {
+                                enabled: false
+                            },
+                            shadow: false,
+                            states: {
+                                hover: {
+                                    lineWidth: 1
+                                }
+                            },
+                            threshold: null
+                        }
+                    },
+
+                    series: [{
+                        type: 'area',
+                        name: "{{ title }}",
+                        pointInterval: 24 * 3600 * 1000,
+                        pointStart: Date.UTC(2015, 8, 27),
+                        data:{{ data }}
+                    }]
+                });
+            });
+        </script>
+	</head>
+	<body>
+		<div>
+			<div class="head_con wrap">
+                <div class = "head-con">
+                    <a href = "/" ><img src = "/site_media/images/mlogo.png"/></a>
+                    <img src = "/site_media/images/logo.png" style = "margin-top:22px;"/>
+                    <!--<div class="logo"><a href="Showindex">北京师范大学研发实验服务基地</a></div> -->
+                </div>
+                <div class="clear"></div>
+                <div class="main_nav">
+                  <ul style = "margin:0px;">
+                      <li><a href="/" >首页</a></li>
+                      <li ><a href="/news_list?news_type=11">基地概况</a></li>
+                      <li><a href="/news_list?news_type=21">动态新闻</a></li>
+                      <li><a href="/news_list?news_type=22">通知公告</a></li>
+                      <li><a href="/instruments_list?news_type=31">观测设备</a></li>
+                      <li><a href="/news_list?news_type=41">服务流程</a></li>
+                      <li onmouseover="showMenu(6)" onmouseout="hiddenMenu(6)"><a href="javascript:void(0);">政策法规</a></li>
+                      <li><a href="/news_list?news_type=61">常用下载</a></li>
+                      <li onmouseover="showMenu(8)" onmouseout="hiddenMenu(8)"><a href="javascript:void(0);">数据观测</a></li>
+                  </ul>
+                  <div class="clear"></div>
+                   <!--下拉菜单 Began -->
+                  <div class="down_menu">
+                    <div class="submenubox" id="menu6"
+                        onmouseover="showMenu(6)" onmouseout="hiddenMenu(6)">
+                      <div class="submenu">
+                        <ul>
+                          <li><a href="/news_list?news_type=51">国家标准</a></li>
+                         <li><a href="/news_list?news_type=52">行业标准</a></li>
+                         <li><a href="/news_list?news_type=53">国际标准</a></li>
+                         <li><a href="/news_list?news_type=54">其他标准</a></li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="submenubox" id="menu8"
+                        onmouseover="showMenu(8)" onmouseout="hiddenMenu(8)">
+                      <div class="submenu">
+                        <ul>
+                          <li><a href="GetMainAir">环境监测</a></li>
+                         <li><a href="GetTodayTem?name=童子岭">温度监测</a></li>
+                         <li><a href="GetMainWater">水质监测</a></li>
+            <!--  			 <li><a href="GetMainAir">森林监测</a></li>-->
+                         <li><a href="GetArcticData?item=voltage">北极数据测试</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!--下拉菜单 End -->
+                </div>
+            </div>
+
+		</div>
+
+		<div class="head_con wrap">
+			<div class="head-con" style="height: 640px; background: none;">
+                <p>
+			        数据类型：
+                    <button class="btn btn-primary mrn0" style="margin-left: 30px;">PM2.5</button>
+                    <button class="btn mrn0">风速</button>
+                    <button class="btn mrn0">雨量</button>
+                    <button class="btn mrn0">紫外线</button>
+                    <button class="btn mrn0">光量子</button>
+                    <button class="btn mrn0">风向</button>
+                </p>
+				<div class="clear"></div>
+                <div id="container" style="min-width:700px;height:400px"></div>
+			</div>
+		</div>
+		<div>
+			<div class="footer">
+                <div class="bottom margin12 wrap">
+                    Copyright ©2014-2014 池州市童子岭观测点 <br>
+                    联系方式：<a href="mailto:929034478@qq.com" target="_blank">技术支持邮箱</a>  &nbsp;&nbsp;&nbsp;<a href="adminlogin.jsp" target="_blank">管理入口</a>
+                </div>
+            </div>
+		</div>
+
+	</body>
+</html>
