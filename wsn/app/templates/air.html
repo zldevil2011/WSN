@@ -46,9 +46,9 @@
             }
         </script>
         <script>
-            if("{{ air_type }}" == "clouddir"){
-                alert("clouddir");
-                $(function () {
+
+            $(function () {
+                if("{{ air_type }}" == "clouddir"){
                     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
                         return {
                             radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
@@ -87,22 +87,12 @@
                         series: [{
                             type: 'pie',
                             name: 'Browser share',
-                            data: [
-                                ['Firefox',   45.0],
-                                ['IE',       26.8],
-                                ['Chrome',  12.8],
-                                ['Safari',    8.5],
-                                ['Opera',     6.2],
-                                ['Others',   0.7]
-                            ]
+                            data: {% autoescape off %}{{ cloud_dir_count_data }}{% endautoescape %}
+
                         }]
                     });
-                });
-
-            }
-            else {
-{#                alert("normal");#}
-                $(function () {
+                }else{
+                    console.log("here");
                     $('#container').highcharts({
                         chart: {
                             zoomType: 'x',
@@ -165,8 +155,14 @@
                             data:{{ data }}
                         }]
                     });
-                });
-            }
+                }
+
+            });
+
+            $(function () {
+
+            });
+
         </script>
 	</head>
 	<body>
