@@ -83,7 +83,7 @@ def air(request):
 
     # data, title, danwei
     data = []
-    air_list = Air.objects.all()[0:24]
+    air_list = Air.objects.all()[0:30]
     air_type = str(air_type)
     main_count = 0
     for dir in cloud_dir:
