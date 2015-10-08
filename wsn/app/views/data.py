@@ -115,7 +115,7 @@ def water(request):
         data_time_format = data_time.strftime(ISOTIMEFORMAT)
         timeArray = time.strptime(data_time_format, "%Y-%m-%d %H:%M:%S")
         seconds = int(time.mktime(timeArray))
-        tmp_dic["x"] = seconds
+        tmp_dic["x"] = str(seconds * 1000)
         tmp_dic["y"] = float(water.ph)
         water_data.append(tmp_dic)
     print water_data
