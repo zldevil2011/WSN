@@ -63,11 +63,12 @@
                                 load: function() {
                                     // set up the updating of the chart each second
                                     var series = this.series[0];
-                                    setInterval(function() {
-                                        var x = (new Date()).getTime(), // current time
-                                            y = Math.random();
-                                        series.addPoint([x, y], true, true);
-                                    }, 1000);
+{#                                    setInterval(function() {#}
+{#                                        var x = (new Date()).getTime(), // current time#}
+{#                                            y = Math.random();#}
+{#                                        console.log(x);#}
+{#                                        series.addPoint([x, y], true, true);#}
+{#                                    }, 5000);#}
                                 }
                             }
                         },
@@ -169,7 +170,7 @@
                         <ul>
                           <li><a href="/air">环境监测</a></li>
                          <li><a href="GetTodayTem?name=童子岭">温度监测</a></li>
-                         <li><a href="GetMainWater">水质监测</a></li>
+                         <li><a href="/water">水质监测</a></li>
             <!--  			 <li><a href="GetMainAir">森林监测</a></li>-->
                          <li><a href="GetArcticData?item=voltage">北极数据测试</a></li>
                         </ul>

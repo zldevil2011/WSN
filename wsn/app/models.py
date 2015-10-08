@@ -28,12 +28,12 @@ class Air(models.Model):
 
 class Water(models.Model):
     water_id = models.AutoField(primary_key=True)
-    ph = models.FloatField()
-    do = models.FloatField()
-    turbidity = models.FloatField()
-    water_level = models.FloatField()
-    conductivity = models.FloatField()
-    time = models.DateTimeField(auto_now=True)
+    ph = models.FloatField(default=0)
+    do = models.FloatField(default=0)
+    turbidity = models.FloatField(default=0)
+    water_level = models.FloatField(default=0)
+    conductivity = models.FloatField(default=0)
+    time = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return str(self.water_id)
