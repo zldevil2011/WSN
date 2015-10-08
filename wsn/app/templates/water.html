@@ -63,12 +63,20 @@
                                 load: function() {
                                     // set up the updating of the chart each second
                                     var series = this.series[0];
-{#                                    setInterval(function() {#}
+                                    var count = 0;
+                                    setInterval(function() {
+                                        count ++;
+                                        if(count >= {{ data_count }}){
+                                            count = 0;
+                                        }
+                                        var index = parseInt(Math.random() * {{ data_count }});
+{#                                        console.log(index);#}
+                                        var xt = {% autoescape off %}{{ water_data }}{% endautoescape %}[count]["x"];
+                                        var yt = {% autoescape off %}{{ water_data }}{% endautoescape %}[count]["y"];
 {#                                        var x = (new Date()).getTime(), // current time#}
 {#                                            y = Math.random();#}
-{#                                        console.log(x);#}
-{#                                        series.addPoint([x, y], true, true);#}
-{#                                    }, 5000);#}
+                                        series.addPoint([parseInt(xt), parseFloat(yt)], true, true);
+                                    }, 1000);
                                 }
                             }
                         },

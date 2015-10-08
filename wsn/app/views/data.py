@@ -108,7 +108,9 @@ def water(request):
     # print water_unit, water_title
     test = []
     water_data = []
+    data_count = 0
     for water in water_list:
+        data_count += 1
         tmp_dic = {}
         ISOTIMEFORMAT = '%Y-%m-%d %X'
         data_time = water.time
@@ -123,6 +125,7 @@ def water(request):
         "water_unit": water_unit,
         "water_title": water_title,
         "water_data": water_data,
+        "data_count": data_count,
     })
 
 
