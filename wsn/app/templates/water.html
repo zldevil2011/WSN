@@ -46,123 +46,94 @@
             }
         </script>
         <script>
-
             $(function () {
-                if("{{ air_type }}" == "clouddir"){
-                    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
-                        return {
-                            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
-                            stops: [
-                                [0, color],
-                                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-                            ]
-                        };
+                $(document).ready(function() {
+                    Highcharts.setOptions({
+                        global: {
+                            useUTC: false
+                        }
                     });
+                    var chart;
                     $('#container').highcharts({
                         chart: {
-                            plotBackgroundColor: null,
-                            plotBorderWidth: null,
-                            plotShadow: false
-                        },
-                        title: {
-                            text: '最近一月风向分布图'
-                        },
-                        tooltip: {
-                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        },
-                        plotOptions: {
-                            pie: {
-                                allowPointSelect: true,
-                                cursor: 'pointer',
-                                dataLabels: {
-                                    enabled: true,
-                                    color: '#000000',
-                                    connectorColor: '#000000',
-                                    formatter: function() {
-                                        return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
-                                    }
+                            type: 'spline',
+                            animation: Highcharts.svg, // don't animate in old IE
+                            marginRight: 10,
+                            events: {
+                                load: function() {
+                                    // set up the updating of the chart each second
+                                    var series = this.series[0];
+                                    var count = 0;
+                                    setInterval(function() {
+                                        count ++;
+                                        if(count >= {{ data_count }}){
+                                            count = 0;
+                                        }
+                                        var index = parseInt(Math.random() * {{ data_count }});
+{#                                        console.log(index);#}
+                                        var xt = {% autoescape off %}{{ water_data }}{% endautoescape %}[count]["x"];
+                                        var yt = {% autoescape off %}{{ water_data }}{% endautoescape %}[count]["y"];
+{#                                        var x = (new Date()).getTime(), // current time#}
+{#                                            y = Math.random();#}
+                                        series.addPoint([parseInt(xt), parseFloat(yt)], true, true);
+                                    }, 1000);
                                 }
                             }
                         },
-                        series: [{
-                            type: 'pie',
-                            name: 'Browser share',
-                            data: {% autoescape off %}{{ cloud_dir_count_data }}{% endautoescape %}
-
-                        }]
-                    });
-                }else{
-                    console.log("here");
-                    $('#container').highcharts({
-                        chart: {
-                            zoomType: 'x',
-                            spacingRight: 20
-                        },
                         title: {
-                            text: '池州市环境监测数据-' + "{{ title }}"
-                        },
-                        subtitle: {
-                            text: document.ontouchstart === undefined ?
-                                    '在绘图区域中单击并拖动缩放' :
-                                    'Pinch the chart to zoom in'
+                            text: '水质监测-' + '{{ water_title }}'
                         },
                         xAxis: {
                             type: 'datetime',
-                            maxZoom: 14 * 24 * 3600000, // fourteen days
-                            title: {
-                                text: null
-                            }
+                            tickPixelInterval: 150
                         },
                         yAxis: {
                             title: {
-                                text: "{{ unit }}"
-                            }
+                                text: '{{ water_unit }}'
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }]
                         },
                         tooltip: {
-                            shared: true
+                            formatter: function() {
+                                    return '<b>'+ this.series.name +'</b><br/>'+
+                                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+                                    Highcharts.numberFormat(this.y, 2);
+                            }
                         },
                         legend: {
                             enabled: false
                         },
-                        plotOptions: {
-                            area: {
-                                fillColor: {
-                                    linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
-                                    stops: [
-                                        [0, Highcharts.getOptions().colors[0]],
-                                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                                    ]
-                                },
-                                lineWidth: 1,
-                                marker: {
-                                    enabled: false
-                                },
-                                shadow: false,
-                                states: {
-                                    hover: {
-                                        lineWidth: 1
-                                    }
-                                },
-                                threshold: null
-                            }
+                        exporting: {
+                            enabled: false
                         },
-
                         series: [{
-                            type: 'area',
-                            name: "{{ title }}",
-                            pointInterval: 24 * 3600 * 1000,
-                            pointStart: Date.UTC(2015, 8, 27),
-                            data:{{ data }}
+                            name: '{{ water_title }}',
+                            data: (function() {
+                                // generate an array of random data
+                                var data = [],
+                                    time = (new Date()).getTime(),
+                                    i;
+
+                                for (i = -19; i <= 0; i++) {
+                                    data.push({
+                                        x: time + i * 1000,
+                                        y: Math.random()
+                                    });
+                                }
+                                console.log(data);
+{#                                return data;#}
+                                console.log({% autoescape off %}{{ water_data }}{% endautoescape %});
+                                return {% autoescape off %}{{ water_data }}{% endautoescape %};
+                            })()
                         }]
                     });
-                }
+                });
 
             });
-
-            $(function () {
-
-            });
-
         </script>
 	</head>
 	<body>
@@ -224,12 +195,11 @@
 			<div class="head-con" style="height: 640px; background: none;">
                 <p>
 			        数据类型：
-                    <button id = "pm25" class="btn mrn0" style="margin-left: 30px;" onclick="get_air('pm25');">PM2.5</button>
-                    <button id = "cloud" class="btn mrn0" onclick="get_air('cloud');">风速</button>
-                    <button id = "rain" class="btn mrn0" onclick="get_air('rain');">雨量</button>
-                    <button id = "ziwai" class="btn mrn0" onclick="get_air('ziwai');">紫外线</button>
-                    <button id = "guang" class="btn mrn0" onclick="get_air('guang');">光量子</button>
-                    <button id = "clouddir" class="btn mrn0" onclick="get_air('clouddir');">风向</button>
+                    <button id = "pm25" class="btn mrn0" style="margin-left: 30px;" onclick="get_air('ph');">酸碱度</button>
+                    <button id = "cloud" class="btn mrn0" onclick="get_air('do');">DO</button>
+                    <button id = "rain" class="btn mrn0" onclick="get_air('turbidity');">浊度</button>
+                    <button id = "ziwai" class="btn mrn0" onclick="get_air('water_level');">水位</button>
+                    <button id = "guang" class="btn mrn0" onclick="get_air('conductivity');">电导率</button>
                 </p>
 				<div class="clear"></div>
                 <div id="container" style="min-width:700px;height:400px"></div>

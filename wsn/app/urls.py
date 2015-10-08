@@ -12,6 +12,7 @@ urlpatterns = \
              url('^news/(?P<news_id>\d+)$', views.news.news_detail, name='news_detail'),
              url('^news_list/$', views.news.news_list, name='news_list'),
              url('^air/$', views.data.air, name='data_air'),
+             url('^water/$', views.data.water, name='data_water'),
              )
 
 # urlpatterns = [
