@@ -103,6 +103,7 @@
 
                 <div class="pubnews_title">文章内容</div>
                 <div class="section">
+                    {% csrf_token %}
                     {{ form }}
 {#                    <script type="text/plain" id="editor" name="mycontent" style="width:719px; height:450px"> </script>#}
 {#                    <script type="text/javascript">#}
