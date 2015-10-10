@@ -96,13 +96,14 @@ water_parameter_data = {
     "conductivity": {"name": "电导率", "unit": "s/cm"},
 }
 def water(request):
-    water_type = "ph"
+    water_type = ""
     try:
-        water_type = request.GET("water_type")
+        water_type = request.GET['water_type']
     except:
-        pass
-
-    water_list = Water.objects.all()[0:30]
+        water_type = "ph"
+    print water_type
+    water_list = Water.objects.all()[8:18]
+    water_list_new = Water.objects.all()[18:30]
     water_unit = water_parameter_data[water_type]["unit"]
     water_title = water_parameter_data[water_type]["name"]
     # print water_unit, water_title
@@ -118,14 +119,50 @@ def water(request):
         timeArray = time.strptime(data_time_format, "%Y-%m-%d %H:%M:%S")
         seconds = int(time.mktime(timeArray))
         tmp_dic["x"] = str(seconds * 1000)
-        tmp_dic["y"] = float(water.ph)
+        "ph", "do", "turbidity", "water_level", "conductivity"
+        if water_type == "ph":
+            tmp_dic["y"] = float(water.ph)
+        elif water_type == "do":
+            tmp_dic["y"] = float(water.do)
+        elif water_type == "turbidity":
+            tmp_dic["y"] = float(water.turbidity)
+        elif water_type == "water_level":
+            tmp_dic["y"] = float(water.water_level)
+        elif water_type == "conductivity":
+            tmp_dic["y"] = float(water.conductivity)
         water_data.append(tmp_dic)
+    water_data_new = []
+    data_count_new = 0
+    for water in water_list_new:
+        data_count_new += 1
+        tmp_dic = {}
+        ISOTIMEFORMAT = '%Y-%m-%d %X'
+        data_time = water.time
+        data_time_format = data_time.strftime(ISOTIMEFORMAT)
+        timeArray = time.strptime(data_time_format, "%Y-%m-%d %H:%M:%S")
+        seconds = int(time.mktime(timeArray))
+        tmp_dic["x"] = str(seconds * 1000)
+        if water_type == "ph":
+            tmp_dic["y"] = float(water.ph)
+        elif water_type == "do":
+            tmp_dic["y"] = float(water.do)
+        elif water_type == "turbidity":
+            tmp_dic["y"] = float(water.turbidity)
+        elif water_type == "water_level":
+            tmp_dic["y"] = float(water.water_level)
+        elif water_type == "conductivity":
+            tmp_dic["y"] = float(water.conductivity)
+        water_data_new.append(tmp_dic)
+
     print water_data
     return render(request, "water.html", {
         "water_unit": water_unit,
         "water_title": water_title,
         "water_data": water_data,
         "data_count": data_count,
+        "water_type": water_type,
+        "water_data_new": water_data_new,
+        "data_count_new": data_count_new,
     })
 
 

@@ -36,17 +36,18 @@
         </style>
         <script type="text/javascript">
             $(function(){
-               $("#"+"{{ air_type }}").addClass("btn-primary");
+               $("#"+"{{ water_type }}").addClass("btn-primary");
+                get_the_chart();
             });
             function exportData(){
                 window.location.href="ExportData?type=air";
             }
-            function get_air(air_type){
-                window.location.href = "/air?air_type=" + air_type;
+            function get_water(water_air){
+                window.location.href = "/water?water_type=" + water_air;
             }
         </script>
         <script>
-            $(function () {
+            function get_the_chart(){
                 $(document).ready(function() {
                     Highcharts.setOptions({
                         global: {
@@ -65,18 +66,20 @@
                                     var series = this.series[0];
                                     var count = 0;
                                     setInterval(function() {
+                                        console.log(count);
                                         count ++;
-                                        if(count >= {{ data_count }}){
-                                            count = 0;
+                                        if(count >= {{ data_count_new }}){
+                                            return;
                                         }
-                                        var index = parseInt(Math.random() * {{ data_count }});
-{#                                        console.log(index);#}
-                                        var xt = {% autoescape off %}{{ water_data }}{% endautoescape %}[count]["x"];
-                                        var yt = {% autoescape off %}{{ water_data }}{% endautoescape %}[count]["y"];
-{#                                        var x = (new Date()).getTime(), // current time#}
-{#                                            y = Math.random();#}
+                                        var xt = {% autoescape off %}{{ water_data_new }}{% endautoescape %}[count]["x"];
+                                        var yt = {% autoescape off %}{{ water_data_new }}{% endautoescape %}[count]["y"];
+                                        var x = (new Date()).getTime(), // current time
+                                            y = Math.random();
+                                        console.log(count);
+                                        console.log(typeof (x));
+                                        console.log(typeof (y));
                                         series.addPoint([parseInt(xt), parseFloat(yt)], true, true);
-                                    }, 1000);
+                                    }, 2000);
                                 }
                             }
                         },
@@ -132,8 +135,7 @@
                         }]
                     });
                 });
-
-            });
+            }
         </script>
 	</head>
 	<body>
@@ -195,11 +197,11 @@
 			<div class="head-con" style="height: 640px; background: none;">
                 <p>
 			        数据类型：
-                    <button id = "pm25" class="btn mrn0" style="margin-left: 30px;" onclick="get_air('ph');">酸碱度</button>
-                    <button id = "cloud" class="btn mrn0" onclick="get_air('do');">DO</button>
-                    <button id = "rain" class="btn mrn0" onclick="get_air('turbidity');">浊度</button>
-                    <button id = "ziwai" class="btn mrn0" onclick="get_air('water_level');">水位</button>
-                    <button id = "guang" class="btn mrn0" onclick="get_air('conductivity');">电导率</button>
+                    <button id = "ph" class="btn mrn0" style="margin-left: 30px;" onclick="get_water('ph');">酸碱度</button>
+                    <button id = "do" class="btn mrn0" onclick="get_water('do');">DO</button>
+                    <button id = "turbidity" class="btn mrn0" onclick="get_water('turbidity');">浊度</button>
+                    <button id = "water_level" class="btn mrn0" onclick="get_water('water_level');">水位</button>
+                    <button id = "conductivity" class="btn mrn0" onclick="get_water('conductivity');">电导率</button>
                 </p>
 				<div class="clear"></div>
                 <div id="container" style="min-width:700px;height:400px"></div>
