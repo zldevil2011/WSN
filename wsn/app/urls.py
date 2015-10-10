@@ -3,6 +3,7 @@ import views.welcome
 import views.index
 import views.news
 import views.data
+import views.util
 
 urlpatterns = \
     patterns('',
@@ -13,6 +14,8 @@ urlpatterns = \
              url('^news_list/$', views.news.news_list, name='news_list'),
              url('^air/$', views.data.air, name='data_air'),
              url('^water/$', views.data.water, name='data_water'),
+             url('^get_excel/$', views.util.get_excel, name='get_excel'),
+
              )
 
 # urlpatterns = [

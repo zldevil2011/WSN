@@ -85,7 +85,7 @@ left: 0;
 width: 150px; 
 height: 25px; 
 opacity: 0; 
-filter: alpha(opacity: 0;); 
+filter: alpha(opacity:0);
 font: 14px/20px "Microsoft YaHei"; 
 color: #f80; 
 } 
@@ -95,4 +95,4 @@ text-indent: 10px;
 .btn-select select option:hover { 
 background-color: #f80; 
 color: #fff; 
-} 
+}
