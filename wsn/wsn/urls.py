@@ -23,6 +23,7 @@ urlpatterns =\
              url(r'', include('app.urls')),
              url(r'^api/', include('app.apiurls')),
              url(r'^wsn_admin/', include('app.admin_urls')),
+             url(r'^ueditor/',include('DjangoUeditor.urls' )),
              url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_PATH})
              # url(r'^site_media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_PATH}),
              )

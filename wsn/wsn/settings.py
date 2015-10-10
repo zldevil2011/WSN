@@ -15,7 +15,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_PATH = './media'
-STATIC_ROOT='./static/'
+STATIC_ROOT = './static/'
+MEDIA_ROOT = './media/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
+    'DjangoUeditor',
 )
 
 REST_FRAMEWORK = {

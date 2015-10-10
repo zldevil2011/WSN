@@ -1,5 +1,6 @@
+#coding:utf-8
 from django.db import models
-
+from DjangoUeditor.models import UEditorField
 
 class Admin(models.Model):
     admin_id = models.AutoField(primary_key=True)
@@ -57,12 +58,16 @@ class Draft(models.Model):
     draft_id = models.AutoField(primary_key=True)
     draft_title = models.CharField(max_length=200)
     draft_type = models.IntegerField()
-    draft_content = models.CharField(max_length=10000)
+    # draft_content = models.CharField(max_length=10000)
+    draft_content = UEditorField(u'draft_content   ', width=600, height=300, toolbars="full",
+                                imagePath="upload/images/", filePath="upload/files/",
+                                upload_settings={"imageMaxSize": 1204000},
+                                settings={}, command=None, event_handler=None, blank=True)
     draft_update_time = models.CharField(max_length=200)
     draft_author = models.ForeignKey(Admin, related_name='draft', null=True)
 
     def __unicode__(self):
-        return self.draft_id
+        return str(self.draft_id)
 
 
 class Recycle(models.Model):
