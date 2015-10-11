@@ -13,6 +13,7 @@
 		<script src="/site_media/js/logger.js"></script>
 		<script type="text/javascript" src="/site_media/js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" language="javascript" src="/site_media/js/slides.jquery.js"></script>
+        <link href="/site_media/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     </head>
 <style>
 .mybottom{
@@ -38,7 +39,7 @@ body {
 	width: 67%;
 	background-color:none;
 	float:right;
-	
+
 }
 #left{
 	font-size:16px;
@@ -46,7 +47,7 @@ body {
 	width: 33%;
 	background-color:none;
 	float:left;
-	
+
 }
 a{
 	text-decoration: none;
@@ -54,14 +55,14 @@ a{
 #left_one{
 	margin-top: 10px;
 	width: 99%;
-	height:294px;
+	height:100px;
 	background-color: none;
 	float:left;
 	border: 1px solid;
 }
 #left_two{
 	width: 99%;
-	height:294px;
+	height:129px;
 	background-color: none;
 	float:left;
 	border: 1px solid;
@@ -178,7 +179,6 @@ border-bottom: 1px solid #ddd;
                             <li><a href="/air">环境监测</a></li>
                             <li><a href="GetTodayTem?name=童子岭">温度监测</a></li>
                             <li><a href="/water">水质监测</a></li>
-            <!--  			 <li><a href="GetMainAir">森林监测</a></li>-->
                             <li><a href="GetArcticData?item=voltage">北极数据测试</a></li>
                         </ul>
                       </div>
@@ -188,57 +188,74 @@ border-bottom: 1px solid #ddd;
                 </div>
             </div>
 		</div>
+
 		<div class="head_con wrap">
-			<div class="head-con" style="height: 643px; background: none;">
-				<div id = "left">
-					<div id="left_one">
-         				<div class="column_bar"><a href="/news_list?news_type=201">更多&raquo;</a><span>动态新闻</span></div>
-         				<div class="list1">
-         					<ul style="list-style:circle">
-                                {% for currentnews in news_list %}
-                                    <li class = "liitem">
-                                        <img src="/site_media/images/arrow0.gif" />
-                                            <a target="_blank" href="/news/{{currentnews.news_id}}">
-                                                {{currentnews.news_title}}</a>
-                                    </li>
-                                {% endfor %}
-         					</ul>
-         				</div>
-					</div>
-					<div id="left_two">
-						<div class="column_bar"><a href="/news_list?news_type=202">更多»</a><span>通知公告</span></div>
-         				<div class="list1">
-         					<ul style="list-style:circle">
-                                {% for currentnews in notice_list %}
-                                    <li class = "liitem">
-                                        <img src="/site_media/images/arrow0.gif" />
-										<a target="_blank" href="/news_detail?news_id={{currentnews.news_id}}">
-											{{currentnews.news_title}}</a>
-									</li>
-                                {% endfor %}
-         					</ul>
-         				</div>
-					</div>
-					<br/>
-					<div class="comein">
-                        <a href="fmapview.jsp">管理员</a>
-                        <a href = "fmapview.jsp" style = "float:left;">普通游客</a></span>
+			<div class="head-con" style="height: auto; background: none;">
+                <div id = "up_summary" style="display: inline;">
+                    <div id = "up_left" style = "text-align: center;padding-top:50px;width:50%; height:467px; float:left; background-color: #67b168;">
+                        <h3 style="font: 800 28px/1.4 黑体;color: white;margin-left: 5%;">智慧环保平台，环保生活</h3>
+                        <div id = "info_type" style="margin: 14px;     margin-bottom: 100px;padding-top: 15px;border-top: 1px white solid;">
+                            <h4 style="font: 800 20px/1.4 黑体;color: white;margin-left: 5%;">水文|环境|生活</h4>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-lg" style="width:40%;margin-left: 5%;">信息观测</button>
+                        <button type="button" class="btn btn-success btn-lg" style="width:40%;margin-left: 5%;">产品介绍</button>
                     </div>
-         		</div>
-				<div id="right">
-					<img src="/site_media/images/entrance.png" style="width:100%;height:100%">
-				</div>
-				<div class="clear"></div>
-			</div>
+                    <div id = "up_right" style = "width: 50%; height:467px;float:right;background-color: #7274A7; ">
+                        <img src="/site_media/images/entrance.png" style="width:100%;height:100%">
+                    </div>
+                </div>
+                <div id = "down_info" style="display: inline;">
+                    <div id = "down_left" style = "width: 50%;float:left;background-color: #7274A7; ">
+                        <div id="left_one">
+         				    <div class="column_bar"><a href="/news_list?news_type=201">更多&raquo;</a><span>动态新闻</span></div>
+         				    <div class="list1">
+         					    <ul style="list-style:circle">
+                                    {% for currentnews in news_list %}
+                                        <li class = "liitem">
+                                            <img src="/site_media/images/arrow0.gif" />
+                                                <a target="_blank" href="/news/{{currentnews.news_id}}">
+                                                {{currentnews.news_title}}</a>
+                                        </li>
+                                    {% endfor %}
+         					    </ul>
+         				    </div>
+					    </div>
+                        <div id="left_two">
+                            <div class="column_bar"><a href="/news_list?news_type=202">更多»</a><span>通知公告</span></div>
+                            <div class="list1">
+                                <ul style="list-style:circle">
+                                    {% for currentnews in notice_list %}
+                                        <li class = "liitem">
+                                            <img src="/site_media/images/arrow0.gif" />
+                                            <a target="_blank" href="/news_detail?news_id={{currentnews.news_id}}">
+                                                {{currentnews.news_title}}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="comein">
+                            <a href="fmapview.jsp">管理员</a>
+                            <a href = "fmapview.jsp" style = "float:left;">普通游客</a></span>
+                        </div>
+                    </div>
+                    <div id = "down_right" style = "width:50%;float:right;background-color: #67b168; ">
+                        <h4>平台简介</h4>
+                        <div style="padding: 5px 20px 12px;">
+                            <p style="line-height: 25px;color: #636B75;text-indent: 2em;">2008年底IBM提出了“智慧地球”的概念，2013年中国开展了智慧城市试点。近几年数字环保得到较快发展，并逐步过渡到智慧环保。智慧环保既是智慧城市的重要组成部分，也是相对独立的系统，在江苏、河北、安徽等省已经开展了部分相关工作并取得一定成绩。智慧环保通过借助物联网技术，把感应器和装备嵌入到各种环境监控对象（物体）中，通过超级计算机和云计算将环保领域物联网整合起来，可以实现人类社会与环境业务系统的整合，以更加精细和动态的方式实现环境管理和决策的智慧。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</div>
 		
-		<div class="footer">
-            <div class="bottom margin12 wrap">
-                Copyright ©2014-2014 池州市童子岭观测点 <br>
-                联系方式：<a href="mailto:929034478@qq.com" target="_blank">技术支持邮箱</a>  &nbsp;&nbsp;&nbsp;<a href="adminlogin.jsp" target="_blank">管理入口</a>
-            </div>
-
-        </div>
+{#		<div class="footer">#}
+{#            <div class="bottom margin12 wrap">#}
+{#                Copyright ©2014-2014 池州市童子岭观测点 <br>#}
+{#                联系方式：<a href="mailto:929034478@qq.com" target="_blank">技术支持邮箱</a>  &nbsp;&nbsp;&nbsp;<a href="adminlogin.jsp" target="_blank">管理入口</a>#}
+{#            </div>#}
+{#        </div>#}
 
 <script type="text/javascript">
 	$(function() {
