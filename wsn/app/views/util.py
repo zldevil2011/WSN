@@ -32,25 +32,33 @@ def get_excel(request):
     print "data_type", data_type
     wb =xlwt.Workbook(encoding='utf8')
     ws = wb.add_sheet('Sheetname')
-    ws.write(0, 0, "采集时间", style=xlwt.Style.default_style)
+    for i in range(0, 8):
+        ws.col(i).width = 0x0d00 + 3000
+    style_k = xlwt.easyxf('font: bold on,colour_index black,height 240, name Malgun Gothic;'
+                        # 'align: wrap off;'
+                        'alignment: horiz centre;'
+                        'borders:left 1,right 1,top 1,bottom 1;'
+                        'pattern: pattern alt_bars, fore_colour gray25, back_colour gray25')
+    # xlwt 默认样式 xlwt.Style.default_style
+    ws.write(0, 0, "采集时间", style=style_k)
     if data_type == "air":
         data_list = Air.objects.all()[0:100]
         for index, type in enumerate(air_parameter):
             ws.write(0, index + 1, air_parameter_data[type]["name"] +
-                     air_parameter_data[type]["unit"], style=xlwt.Style.default_style)
+                     air_parameter_data[type]["unit"], style=style_k)
         sum = [0, 0, 0, 0, 0, 0]
         max_data = [-9999, -9999, -9999,-9999, -9999, -9999]
         min_data = [9999, 9999, 9999,9999, 9999, 9999]
         ISOTIMEFORMAT = '%Y-%m-%d %X'
         count = 1
         for data in data_list:
-            ws.write(count, 0, data.time.strftime(ISOTIMEFORMAT), style=xlwt.Style.default_style)
-            ws.write(count, 1, data.pm25, style=xlwt.Style.default_style)
-            ws.write(count, 2, data.cloud, style=xlwt.Style.default_style)
-            ws.write(count, 3, data.rain, style=xlwt.Style.default_style)
-            ws.write(count, 4, data.ziwai, style=xlwt.Style.default_style)
-            ws.write(count, 5, data.guang, style=xlwt.Style.default_style)
-            ws.write(count, 6, data.clouddir, style=xlwt.Style.default_style)
+            ws.write(count, 0, data.time.strftime(ISOTIMEFORMAT), style=style_k)
+            ws.write(count, 1, data.pm25, style=style_k)
+            ws.write(count, 2, data.cloud, style=style_k)
+            ws.write(count, 3, data.rain, style=style_k)
+            ws.write(count, 4, data.ziwai, style=style_k)
+            ws.write(count, 5, data.guang, style=style_k)
+            ws.write(count, 6, data.clouddir, style=style_k)
             sum[1] += data.pm25
             if float(data.pm25) > max_data[1]:
                 max_data[1] = float(data.pm25)
@@ -77,35 +85,35 @@ def get_excel(request):
             if data.guang < min_data[5]:
                 min_data[5] = data.guang
             count += 1
-        ws.write(count, 0, "最大值", style=xlwt.Style.default_style)
+        ws.write(count, 0, "最大值", style=style_k)
         for i in range(1, 6):
-            ws.write(count, i, max_data[i], style=xlwt.Style.default_style)
+            ws.write(count, i, max_data[i], style=style_k)
         count += 1
-        ws.write(count, 0, "最小值", style=xlwt.Style.default_style)
+        ws.write(count, 0, "最小值", style=style_k)
         for i in range(1, 6):
-            ws.write(count, i, min_data[i], style=xlwt.Style.default_style)
+            ws.write(count, i, min_data[i], style=style_k)
         count += 1
-        ws.write(count, 0, "平均值", style=xlwt.Style.default_style)
+        ws.write(count, 0, "平均值", style=style_k)
         for i in range(1, 6):
-            ws.write(count, i, sum[i]/float(len(data_list)), style=xlwt.Style.default_style)
+            ws.write(count, i, sum[i]/float(len(data_list)), style=style_k)
         count += 1
     elif data_type == "water":
         data_list = Water.objects.all()[0:100]
         for index, type in enumerate(water_parameter):
             ws.write(0, index + 1, water_parameter_data[type]["name"] +
-                     water_parameter_data[type]["unit"], style=xlwt.Style.default_style)
+                     water_parameter_data[type]["unit"], style=style_k)
         sum = [0, 0, 0, 0, 0, 0]
         max_data = [-9999, -9999, -9999,-9999, -9999, -9999]
         min_data = [9999, 9999, 9999,9999, 9999, 9999]
         ISOTIMEFORMAT = '%Y-%m-%d %X'
         count = 1
         for data in data_list:
-            ws.write(count, 0, data.time.strftime(ISOTIMEFORMAT), style=xlwt.Style.default_style)
-            ws.write(count, 1, data.ph, style=xlwt.Style.default_style)
-            ws.write(count, 2, data.do, style=xlwt.Style.default_style)
-            ws.write(count, 3, data.turbidity, style=xlwt.Style.default_style)
-            ws.write(count, 4, data.water_level, style=xlwt.Style.default_style)
-            ws.write(count, 5, data.conductivity, style=xlwt.Style.default_style)
+            ws.write(count, 0, data.time.strftime(ISOTIMEFORMAT), style=style_k)
+            ws.write(count, 1, data.ph, style=style_k)
+            ws.write(count, 2, data.do, style=style_k)
+            ws.write(count, 3, data.turbidity, style=style_k)
+            ws.write(count, 4, data.water_level, style=style_k)
+            ws.write(count, 5, data.conductivity, style=style_k)
             sum[1] += data.ph
             if float(data.ph) > max_data[1]:
                 max_data[1] = float(data.ph)
@@ -132,17 +140,17 @@ def get_excel(request):
             if data.conductivity < min_data[5]:
                 min_data[5] = data.conductivity
             count += 1
-        ws.write(count, 0, "最大值", style=xlwt.Style.default_style)
+        ws.write(count, 0, "最大值", style=style_k)
         for i in range(1, 6):
-            ws.write(count, i, max_data[i], style=xlwt.Style.default_style)
+            ws.write(count, i, max_data[i], style=style_k)
         count += 1
-        ws.write(count, 0, "最小值", style=xlwt.Style.default_style)
+        ws.write(count, 0, "最小值", style=style_k)
         for i in range(1, 6):
-            ws.write(count, i, min_data[i], style=xlwt.Style.default_style)
+            ws.write(count, i, min_data[i], style=style_k)
         count += 1
-        ws.write(count, 0, "平均值", style=xlwt.Style.default_style)
+        ws.write(count, 0, "平均值", style=style_k)
         for i in range(1, 6):
-            ws.write(count, i, sum[i]/float(len(data_list)), style=xlwt.Style.default_style)
+            ws.write(count, i, sum[i]/float(len(data_list)), style=style_k)
         count += 1
 
 
