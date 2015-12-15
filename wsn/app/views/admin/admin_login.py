@@ -13,6 +13,7 @@ def admin_login(request):
     username = request.POST['login']
     password = request.POST['pwd']
     print username, password
+
     return HttpResponse("success")
 
 

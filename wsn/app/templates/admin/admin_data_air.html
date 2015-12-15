@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>池州星地一体化监测及无线传感器网络应用示范</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" charset="utf-8" src="/site_media/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/site_media/js/jquery.form.js"></script>
+
+<link rel="stylesheet" href="/site_media/css/manage.css" />
+
+</head>
+
+<body>
+	<div class="csdn-toolbar csdn-toolbar-skin-black ">
+		<div class="container row center-block ">
+            <div class="pull-left">
+                <a href="/wsn_admin/admin_news" >新闻模块</a>
+                <a href="/wsn_admin/admin_user" >用户管理</a>
+                <a href="/wsn_admin/data?data_type=air">数据管理</a>
+            </div>
+			<div class="pull-right login-wrap unlogin">
+				<ul class="btns">
+					<li class="loginlink"><span>欢迎您，XXX
+					</span>&nbsp;|<a href="/wsn_admin/user/update" target="_top">&nbsp;修改信息&nbsp;</a>|<a href="/wsn_admin/user/update_password"
+						target="_top">&nbsp;修改密码&nbsp;</a> |<a target="_top" href="/wsn_admin/user/logout">&nbsp;登出</a>|<a target="_top" href="/index">&nbsp;首页</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="wrap">
+
+		<div class="head">
+			<div class="user_info"></div>
+		</div>
+
+		<div class="tabs_header">
+			<ul id="ul_tab" class="tabs" style="width:395px;">
+				<li class="active"><a href="?data_type=air"><span>空气数据</span> </a></li>
+				<li><a href="?data_type=water"><span>水质数据</span> </a></li>
+			</ul>
+		</div>
+		<table id="lstBox" cellspacing="0">
+			<tr>
+				<th class="tdleft">ID</th>
+				<th style="width:90px;">PM2.5</th>
+				<th style="width:90px;">风速</th>
+				<th style="width:90px;">雨量</th>
+ 				<th style="width:90px;">紫外指数</th>
+ 				<th style="width:90px;">光量子指数</th>
+ 				<th style="width:90px;">风向</th>
+ 				<th style="width:170px;">时间</th>
+ 				<th style="width:170px;">操作</th>
+			</tr>
+
+            {% for air in air_list %}
+
+                <tr class="altitem">
+                    <td class="tdleft">{{ air.air_id }}</td>
+                    <td>{{air.pm25}}</td>
+                    <td>{{air.cloud}}</td>
+                    <td>{{air.rain}}</td>
+                    <td>{{air.ziwai}}</td>
+                    <td>{{air.guang}}</td>
+                    <td>{{air.clouddir}}</td>
+                    <td>{{air.time}}</td>
+                    <td>
+                        <a href="#">编辑</a> |
+                        <a href="#">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+		</table>
+        <input style="display: inline; float: right;" type="button" value = "上传" >
+        <input style = "display: inline; float: right;" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+	</div>
+<form id="Selchange" method = "post" action="Selchange"></form>
+</body>
+</html>
