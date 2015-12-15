@@ -45,10 +45,16 @@ def admin_data(request):
 @csrf_exempt
 def admin_data_upload(request):
     print "come in"
-    data_type = request.POST['data_type']
-    print data_type
-    data_file = request.FILES['data_file']
-    print data_file
+    try:
+        data_type = request.POST['data_type']
+        print data_type
+    except:
+        print "get Failed"
+    try:
+        data_file = request.FILES['data_file']
+        print data_file
+    except:
+        print "get FILE FAILED"
     print "JuST  Here"
-    return HttpResponse("上传数据页面")
+    return HttpResponse("success")
 # Create your views here.
