@@ -54,11 +54,11 @@ def admin_data_upload(request):
     print type(data_file)
 
     if data_type == "water":
-        destination = open(os.path.join("E:\\upload\\water", data_file.name), 'wb+')    # 打开特定的文件进行二进制的写操作
+        destination = open(os.path.join(data_file.name), 'wb+')    # 打开特定的文件进行二进制的写操作
         for chunk in data_file.chunks():      # 分块写入文件
             destination.write(chunk)
         destination.close()
-        path = "E:\\upload\\water\\" + data_file.name
+        path = data_file.name
         print path
         data = xlrd.open_workbook(path)
         table = data.sheets()[0]
@@ -77,11 +77,11 @@ def admin_data_upload(request):
             water.save()
         return HttpResponseRedirect("/wsn_admin/data?data_type=" + data_type)
     elif data_type == "air":
-        destination = open(os.path.join("E:\\upload\\air", data_file.name), 'wb+')    # 打开特定的文件进行二进制的写操作
+        destination = open(os.path.join(data_file.name), 'wb+')    # 打开特定的文件进行二进制的写操作
         for chunk in data_file.chunks():      # 分块写入文件
             destination.write(chunk)
         destination.close()
-        path = "E:\\upload\\air\\" + data_file.name
+        path = data_file.name
         print path
         data = xlrd.open_workbook(path)
         table = data.sheets()[0]
