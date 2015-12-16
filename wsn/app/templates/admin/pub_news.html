@@ -21,9 +21,10 @@
 {#                $('#selType').html(htm);#}
             });
             function Selchange(id) {
-                $('#Selchange').ajaxSubmit({
+                console.log("okoko");
+                $('#pubnewsform').ajaxSubmit({
                     type: 'post',
-                    url: 'sel_change?first='+id,
+                    url: '/wsn_admin/sel_change?first='+id,
                     success: function(data) {
                         tmp = '<option value="';
                         tmp+= (id*100);

@@ -111,6 +111,7 @@ def pub_news(request):
 
 @csrf_exempt
 def sel_change(request):
+    print "here"
     first_type = request.GET['first']
     print first_type
     innerhtml = ""
