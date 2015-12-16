@@ -106,7 +106,7 @@ def pub_news(request):
        news_author=admin,
     )
     new_news.save()
-    return HttpResponseRedirect('admin_news')
+    return HttpResponseRedirect('/wsn_admin/admin_news')
 
 
 @csrf_exempt

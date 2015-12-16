@@ -23,7 +23,7 @@
             function Selchange(id) {
                 console.log("okoko");
                 $('#pubnewsform').ajaxSubmit({
-                    type: 'post',
+                    type: 'get',
                     url: '/wsn_admin/sel_change?first='+id,
                     success: function(data) {
                         tmp = '<option value="';
@@ -69,7 +69,7 @@
                     <li><a href="/wsn_admin/admin_recycle"><span>回收站</span> </a></li>
                 </ul>
             </div>
-            <form id="pubnewsform" method="post" action="pub_news">
+            <form id="pubnewsform" method="post" action="/wsn_admin/pub_news/">
                 <div class="pubnews_title">发布时间</div>
                 <div style="display:block; width:500px;height:30px;">
                     <input  name="nowtime" id="txtTitle" type="text"
