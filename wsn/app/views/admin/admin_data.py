@@ -1,4 +1,4 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from app.models import News, Admin, Air, Water
 import time
@@ -7,7 +7,8 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.cache import cache
 from django.views.decorators.cache import never_cache
-
+import xlrd
+import os
 first_tuple = ["请选择", "基地概况", "新闻公告", "观测设备", "服务流程", "政策法规", "常用下载","测试专用" ]
 second_dic = {
     '0': {},
@@ -45,16 +46,27 @@ def admin_data(request):
 @csrf_exempt
 def admin_data_upload(request):
     print "come in"
-    try:
-        data_type = request.POST['data_type']
-        print data_type
-    except:
-        print "get Failed"
-    try:
-        data_file = request.FILES['data_file']
-        print data_file
-    except:
-        print "get FILE FAILED"
-    print "JuST  Here"
+    data_type = request.POST['data_type']
+    # print data_type
+
+    data_file = request.FILES['data_file']
+    # print data_file.name
+    print type(data_file)
+
+    if data_type == "water":
+        destination = open(os.path.join("E:\\upload\\water", data_file.name), 'wb+')    # 打开特定的文件进行二进制的写操作
+        for chunk in data_file.chunks():      # 分块写入文件
+            destination.write(chunk)
+        destination.close()
+        return HttpResponseRedirect("/wsn_admin/data?data_type=" + data_type)
+    elif data_type == "air":
+        destination = open(os.path.join("E:\\upload\\air", data_file.name), 'wb+')    # 打开特定的文件进行二进制的写操作
+        for chunk in data_file.chunks():      # 分块写入文件
+            destination.write(chunk)
+        destination.close()
+        return HttpResponseRedirect("/wsn_admin/data?data_type=" + data_type)
     return HttpResponse("success")
+
+
+
 # Create your views here.
