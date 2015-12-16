@@ -10,6 +10,7 @@ def admin_index(request):
 
 @csrf_exempt
 def admin_login(request):
+    print "OK"
     username = request.POST['login']
     password = request.POST['pwd']
     print username, password

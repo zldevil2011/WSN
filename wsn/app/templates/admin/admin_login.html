@@ -17,7 +17,7 @@
 		type: 'post',
 		success: function(data) {
 			if(data == 'success') {
-				window.location.href = 'admin_news/';
+				window.location.href = '/wsn_admin/admin_news/';
 			} else {
 				alert('用户名不存在或密码错误');
 			}
@@ -32,7 +32,7 @@
 		<div class="login_tit2">
 			<img src="/site_media/images/nw.png" />
 		</div>
-		<form id="userloginform" name="userform" action="/wsn_admin/admin_login" method="post">
+		<form id="userloginform" name="userform" action="/wsn_admin/admin_login/" method="post">
 			<div class="login_main">
 				<p>
 					<span>用户名</span>
