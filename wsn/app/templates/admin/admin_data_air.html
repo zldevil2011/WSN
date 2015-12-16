@@ -73,8 +73,13 @@
                 </tr>
             {% endfor %}
 		</table>
-        <input style="display: inline; float: right;" type="button" value = "上传" >
-        <input style = "display: inline; float: right;" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        <form id = "myForm" enctype="multipart/form-data" action="/wsn_admin/data/upload/" method="post">
+            <input type="submit" style="display: inline; float: right;"
+                   value = "上传" >
+            <input id = "data_file" type="file" name = "data_file" style = "display: inline; float: right;"
+                   accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            <input type="text" name = "data_type" value="air" style="display:none;">
+        </form>
 	</div>
 <form id="Selchange" method = "post" action="Selchange"></form>
 </body>

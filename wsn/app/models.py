@@ -14,7 +14,7 @@ class Admin(models.Model):
 
 
 class Air(models.Model):
-    air_id = models.IntegerField()
+    air_id = models.AutoField(primary_key=True)
     pm25 = models.FloatField()
     cloud = models.FloatField()
     rain = models.FloatField()
@@ -34,7 +34,7 @@ class Water(models.Model):
     turbidity = models.FloatField(default=0)
     water_level = models.FloatField(default=0)
     conductivity = models.FloatField(default=0)
-    time = models.DateTimeField(auto_now_add=True)
+    time = models.DateTimeField()
 
     def __unicode__(self):
         return str(self.water_id)

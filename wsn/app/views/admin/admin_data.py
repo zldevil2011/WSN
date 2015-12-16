@@ -58,12 +58,47 @@ def admin_data_upload(request):
         for chunk in data_file.chunks():      # 分块写入文件
             destination.write(chunk)
         destination.close()
+        path = "E:\\upload\\water\\" + data_file.name
+        print path
+        data = xlrd.open_workbook(path)
+        table = data.sheets()[0]
+        nrows = table.nrows
+        ncols = table.ncols
+        for i in range(1, nrows):
+            data = table.row_values(i)
+            water = Water(
+                    ph=float(data[0]),
+                    do=float(data[1]),
+                    turbidity=float(data[2]),
+                    water_level=float(data[3]),
+                    conductivity=float(data[4]),
+                    time=data[5]
+            )
+            water.save()
         return HttpResponseRedirect("/wsn_admin/data?data_type=" + data_type)
     elif data_type == "air":
         destination = open(os.path.join("E:\\upload\\air", data_file.name), 'wb+')    # 打开特定的文件进行二进制的写操作
         for chunk in data_file.chunks():      # 分块写入文件
             destination.write(chunk)
         destination.close()
+        path = "E:\\upload\\air\\" + data_file.name
+        print path
+        data = xlrd.open_workbook(path)
+        table = data.sheets()[0]
+        nrows = table.nrows
+        ncols = table.ncols
+        for i in range(1, nrows):
+            data = table.row_values(i)
+            air = Air(
+                    pm25=float(data[0]),
+                    cloud=float(data[1]),
+                    rain=float(data[2]),
+                    ziwai=float(data[3]),
+                    guang=float(data[4]),
+                    clouddir=data[5],
+                    time=data[6]
+            )
+            air.save()
         return HttpResponseRedirect("/wsn_admin/data?data_type=" + data_type)
     return HttpResponse("success")
 
