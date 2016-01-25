@@ -4,6 +4,7 @@ import views.index
 import views.news
 import views.data
 import views.util
+import views.test
 
 urlpatterns = \
     patterns('',
@@ -15,7 +16,7 @@ urlpatterns = \
              url('^air/$', views.data.air, name='data_air'),
              url('^water/$', views.data.water, name='data_water'),
              url('^get_excel/$', views.util.get_excel, name='get_excel'),
-
+             url('^all_screen/$', views.test.all_screen, name='all_screen'),
              )
 
 # urlpatterns = [
